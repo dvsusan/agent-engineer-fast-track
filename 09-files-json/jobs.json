@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Python Agent 工程师",
+    "city": "上海",
+    "salary": 18000,
+    "skills": ["Python", "RAG", "FastAPI"]
+  },
+  {
+    "title": "AI 应用工程师",
+    "city": "杭州",
+    "salary": 22000,
+    "skills": ["Python", "Prompt", "FastAPI"]
+  },
+  {
+    "title": "数据分析工程师",
+    "city": "上海",
+    "salary": 16000,
+    "skills": ["Python", "SQL"]
+  }
+]

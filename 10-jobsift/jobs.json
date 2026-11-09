@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Python Agent 工程师",
+    "city": "上海",
+    "salary": 18000,
+    "remote": false,
+    "skills": ["Python", "RAG", "FastAPI"]
+  },
+  {
+    "title": "AI 应用工程师",
+    "city": "杭州",
+    "salary": 22000,
+    "remote": true,
+    "skills": ["Python", "Prompt", "FastAPI"]
+  },
+  {
+    "title": "数据分析工程师",
+    "city": "上海",
+    "salary": 16000,
+    "remote": false,
+    "skills": ["Python", "SQL"]
+  },
+  {
+    "title": "RAG 工程师",
+    "city": "上海",
+    "salary": 25000,
+    "remote": true,
+    "skills": ["Python", "RAG", "向量数据库"]
+  },
+  {
+    "title": "Python 开发工程师",
+    "city": "深圳",
+    "salary": 15000,
+    "remote": false,
+    "skills": ["Python", "SQL"]
+  },
+  {
+    "title": "AI 数据产品工程师",
+    "city": "杭州",
+    "salary": "面议",
+    "remote": true,
+    "skills": ["Python", "数据分析"]
+  }
+]
