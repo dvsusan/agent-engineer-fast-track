@@ -11,6 +11,7 @@ def build_weak_prompt(text):
 
 
 def build_strong_prompt(text):
+    """Define the task, constraints, and exact fields the parser expects."""
     return f"""
 你是阅读卡片生成器。请阅读下面的文章，并返回一个 JSON 对象。
 

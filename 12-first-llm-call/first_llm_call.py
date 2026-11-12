@@ -19,6 +19,7 @@ def mock_chat(messages):
 def chat(messages, temperature=0.2):
     """Send messages to an OpenAI-compatible endpoint."""
     api_key = os.getenv("LLM_API_KEY", "").strip()
+    # Mock mode keeps the complete exercise runnable without network or cost.
     mock_mode = os.getenv("LLM_MOCK", "0") == "1" or not api_key
 
     if mock_mode:
@@ -53,6 +54,7 @@ def chat(messages, temperature=0.2):
     except urllib.error.URLError as error:
         raise RuntimeError(f"无法连接模型服务：{error.reason}") from error
 
+    # A chat response wraps the model text inside a structured response object.
     content = response_data["choices"][0]["message"]["content"]
     return content, "remote"
 

@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 base_url = os.getenv("LLM_BASE_URL", "https://api.example.com/v1")
 endpoint = base_url.rstrip("/") + "/chat/completions"
 parsed = urlparse(endpoint)
+# Read credentials from the environment; never embed them in source files.
 api_key = os.getenv("LLM_API_KEY", "")
 
 payload = {

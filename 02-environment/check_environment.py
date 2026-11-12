@@ -7,6 +7,9 @@ import shutil
 import sys
 
 
+COURSE_PYTHON = (3, 15, 2)
+
+
 def find_command(name: str) -> str:
     path = shutil.which(name)
     return path if path else "未找到"
@@ -18,7 +21,8 @@ print(f"Git: {find_command('git')}")
 print(f"uv: {find_command('uv')}")
 print(f"VS Code CLI: {find_command('code')}")
 
-if sys.version_info < (3, 12):
-    print("提示: 当前 Python 低于 3.12，请按照教程安装课程版本。")
+if sys.version_info[:3] != COURSE_PYTHON:
+    required = ".".join(str(part) for part in COURSE_PYTHON)
+    print(f"提示: 当前 Python 不是课程基线 {required}，请安装对应版本。")
 else:
-    print("提示: Python 主版本符合课程要求。")
+    print("提示: Python 版本符合课程基线 3.15.2。")

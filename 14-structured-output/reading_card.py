@@ -1,12 +1,12 @@
 """Validate a model-generated reading card with Pydantic."""
 
-import json
 import sys
 
 from pydantic import BaseModel, Field, ValidationError, field_validator
 
 
 class ReadingCard(BaseModel):
+    """Executable schema for one structured reading card."""
     title: str = Field(min_length=1, max_length=40)
     summary: str = Field(min_length=10, max_length=500)
     key_points: list[str] = Field(min_length=2, max_length=6)
@@ -22,30 +22,21 @@ class ReadingCard(BaseModel):
         return cleaned
 
 
-valid_payload = {
-    "title": "工具超时为什么要查询真实状态",
-    "summary": "工具超时只说明结果未知，并不代表动作没有执行。系统应先查询业务状态，再决定重试或补偿。",
-    "key_points": [
-        "调用前必须校验权限和参数",
-        "超时后不能直接重复执行",
-        "关键动作需要幂等和审计",
-    ],
-    "tags": ["Agent", "工具调用", "幂等"],
-    "review_questions": [
-        "为什么超时可能已经产生副作用？",
-        "如何避免重复退款或重复发送消息？",
-    ],
-}
+# This is the exact JSON text printed as the Mock result in chapter 13.
+valid_model_output = (
+    '{"title":"工具调用的安全边界",'
+    '"summary":"调用工具前要校验权限、参数和目标。超时只说明结果未知，不能直接判定失败。",'
+    '"key_points":["执行前做权限与参数校验","超时后先查询真实状态"],'
+    '"tags":["Agent","工具调用","超时"],'
+    '"review_questions":["为什么超时不等于失败？","工具调用前要检查什么？"]}'
+)
 
-invalid_payload = {
-    "title": "",
-    "summary": "太短",
-    "key_points": ["只有一条"],
-    "tags": ["Agent"],
-}
+invalid_model_output = (
+    '{"title":"","summary":"太短",'
+    '"key_points":["只有一条"],"tags":["Agent"]}'
+)
 
-payload = invalid_payload if "--bad" in sys.argv else valid_payload
-raw_json = json.dumps(payload, ensure_ascii=False)
+raw_json = invalid_model_output if "--bad" in sys.argv else valid_model_output
 
 try:
     card = ReadingCard.model_validate_json(raw_json)

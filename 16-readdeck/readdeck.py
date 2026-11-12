@@ -130,6 +130,7 @@ def fallback_card(article):
 
 
 def generate_card(article):
+    """Try twice to obtain a valid card, then fall back to a safe local result."""
     correction = ""
     for attempt in range(1, 3):
         content, mode = call_model(build_prompt(article, correction))
