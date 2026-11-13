@@ -1,0 +1,12 @@
+{
+  "mode": "mock",
+  "attempts": 1,
+  "failure_reason": "无",
+  "final_card_validation": [
+    "schema",
+    "source_quote"
+  ],
+  "summary_length": 52,
+  "tag_count": 4,
+  "output_file": "reading_card_output.json"
+}
