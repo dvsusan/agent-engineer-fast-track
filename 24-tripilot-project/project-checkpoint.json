@@ -1,0 +1,190 @@
+{
+  "status": "completed",
+  "current_step": 6,
+  "completed_ids": [
+    "date",
+    "places",
+    "route",
+    "weather-2026-11-15",
+    "weather-2026-11-16",
+    "weather-2026-11-17"
+  ],
+  "cancel_reason": "",
+  "plan": [
+    {
+      "id": "date",
+      "tool": "get_current_date",
+      "arguments": {},
+      "depends_on": [],
+      "purpose": "确认规划基准日期"
+    },
+    {
+      "id": "weather-2026-11-15",
+      "tool": "get_weather",
+      "arguments": {
+        "city": "杭州",
+        "date": "2026-11-15"
+      },
+      "depends_on": [
+        "date"
+      ],
+      "purpose": "查询 2026-11-15 的天气"
+    },
+    {
+      "id": "weather-2026-11-16",
+      "tool": "get_weather",
+      "arguments": {
+        "city": "杭州",
+        "date": "2026-11-16"
+      },
+      "depends_on": [
+        "date"
+      ],
+      "purpose": "查询 2026-11-16 的天气"
+    },
+    {
+      "id": "weather-2026-11-17",
+      "tool": "get_weather",
+      "arguments": {
+        "city": "杭州",
+        "date": "2026-11-17"
+      },
+      "depends_on": [
+        "date"
+      ],
+      "purpose": "查询 2026-11-17 的天气"
+    },
+    {
+      "id": "places",
+      "tool": "search_places",
+      "arguments": {
+        "city": "杭州",
+        "keyword": "拍照",
+        "limit": 3
+      },
+      "depends_on": [
+        "weather-2026-11-15",
+        "weather-2026-11-16",
+        "weather-2026-11-17"
+      ],
+      "purpose": "根据天气准备拍照地点"
+    },
+    {
+      "id": "route",
+      "tool": "estimate_route",
+      "arguments": {
+        "origin": "西湖",
+        "destination": "九溪烟树"
+      },
+      "depends_on": [
+        "places"
+      ],
+      "purpose": "确认地点之间的步行强度"
+    }
+  ],
+  "results": {
+    "date": {
+      "date": "2026-11-15"
+    },
+    "weather-2026-11-15": {
+      "city": "杭州",
+      "date": "2026-11-15",
+      "condition": "多云",
+      "temperature": "20-25°C"
+    },
+    "weather-2026-11-16": {
+      "city": "杭州",
+      "date": "2026-11-16",
+      "condition": "多云",
+      "temperature": "20-25°C"
+    },
+    "weather-2026-11-17": {
+      "city": "杭州",
+      "date": "2026-11-17",
+      "condition": "多云",
+      "temperature": "20-25°C"
+    },
+    "places": [
+      {
+        "name": "西湖",
+        "feature": "湖景与拍照"
+      },
+      {
+        "name": "九溪烟树",
+        "feature": "自然景观"
+      },
+      {
+        "name": "南宋御街",
+        "feature": "街区散步"
+      }
+    ],
+    "route": {
+      "origin": "西湖",
+      "destination": "九溪烟树",
+      "walking_minutes": 40
+    }
+  },
+  "gateway": {
+    "allowed_tools": [
+      "estimate_route",
+      "get_current_date",
+      "get_weather",
+      "search_places"
+    ],
+    "remaining_budget": 4,
+    "call_log": [
+      {
+        "tool": "get_current_date",
+        "arguments": {},
+        "cost": 0,
+        "ok": true
+      },
+      {
+        "tool": "get_weather",
+        "arguments": {
+          "city": "杭州",
+          "date": "2026-11-15"
+        },
+        "cost": 1,
+        "ok": true
+      },
+      {
+        "tool": "get_weather",
+        "arguments": {
+          "city": "杭州",
+          "date": "2026-11-16"
+        },
+        "cost": 1,
+        "ok": true
+      },
+      {
+        "tool": "get_weather",
+        "arguments": {
+          "city": "杭州",
+          "date": "2026-11-17"
+        },
+        "cost": 1,
+        "ok": true
+      },
+      {
+        "tool": "search_places",
+        "arguments": {
+          "city": "杭州",
+          "keyword": "拍照",
+          "limit": 3
+        },
+        "cost": 2,
+        "ok": true
+      },
+      {
+        "tool": "estimate_route",
+        "arguments": {
+          "origin": "西湖",
+          "destination": "九溪烟树"
+        },
+        "cost": 1,
+        "ok": true
+      }
+    ]
+  }
+}
