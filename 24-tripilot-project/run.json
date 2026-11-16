@@ -5,11 +5,13 @@
   "estimated_tool_cost": 6,
   "remaining_tool_budget": 4,
   "tool_calls": 6,
+  "send_attempts": 2,
   "send_receipt": {
     "receipt_id": "receipt-001",
     "status": "sent",
     "duplicate": true
   },
+  "compensation": null,
   "files": [
     "itinerary.md",
     "run.json",

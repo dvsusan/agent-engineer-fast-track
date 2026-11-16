@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="TripPilot V1 旅行规划 Agent 工作台"
+    />
+    <title>TripPilot · Agent 工作台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="TripPilot 首页">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-needle"></span>
+        </span>
+        <span class="brand-copy">
+          <strong>TripPilot</strong>
+          <small>AGENT WORKSPACE</small>
+        </span>
+      </a>
+      <div class="local-status">
+        <span class="pulse-dot"></span>
+        本地安全运行
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">STAGE 03 · TRIPPILOT V1</p>
+          <h1>让旅行计划<br /><span>真正跑起来。</span></h1>
+          <p class="hero-copy">
+            输入需求，观察 Agent 如何依赖调度、经过工具网关、保存检查点，
+            再把一份可核验的行程安全送达。
+          </p>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbit-ring ring-one"></div>
+          <div class="orbit-ring ring-two"></div>
+          <div class="orbit-core">
+            <span>6</span>
+            <small>任务闭环</small>
+          </div>
+          <span class="orbit-tag tag-weather">天气</span>
+          <span class="orbit-tag tag-plan">计划</span>
+          <span class="orbit-tag tag-send">发送</span>
+        </div>
+      </section>
+
+      <section class="workspace-grid">
+        <form id="request-form" class="panel request-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">01 · 旅行需求</p>
+              <h2>这次想去哪里？</h2>
+            </div>
+            <span class="panel-badge">3 DAYS</span>
+          </div>
+
+          <div class="field-row two-columns">
+            <label class="field">
+              <span>目的地</span>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                value="杭州"
+                autocomplete="off"
+                required
+              />
+            </label>
+            <label class="field">
+              <span>工具预算</span>
+              <div class="budget-input">
+                <input
+                  id="tool-budget"
+                  name="tool_budget"
+                  type="number"
+                  min="1"
+                  max="50"
+                  value="10"
+                  required
+                />
+                <small>积分</small>
+              </div>
+            </label>
+          </div>
+
+          <fieldset class="date-fieldset">
+            <legend>旅行日期</legend>
+            <div class="date-grid">
+              <label>
+                <small>DAY 1</small>
+                <input name="date1" type="date" value="2026-11-15" required />
+              </label>
+              <label>
+                <small>DAY 2</small>
+                <input name="date2" type="date" value="2026-11-16" required />
+              </label>
+              <label>
+                <small>DAY 3</small>
+                <input name="date3" type="date" value="2026-11-17" required />
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="field">
+            <span>旅行偏好</span>
+            <textarea
+              id="preference"
+              name="preference"
+              rows="3"
+              required
+            >拍照，不想走太多路</textarea>
+          </label>
+
+          <div class="form-footer">
+            <p class="form-hint">
+              规划阶段只读取 Mock 工具，不会把行程发送到外部。
+            </p>
+            <button id="run-button" class="button button-primary" type="submit">
+              <span>执行规划</span>
+              <span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </form>
+
+        <section class="panel run-panel">
+          <div class="panel-heading run-heading">
+            <div>
+              <p class="section-kicker">02 · 执行现场</p>
+              <h2>Agent 运行轨迹</h2>
+            </div>
+            <span id="status-badge" class="status-badge status-idle">
+              等待开始
+            </span>
+          </div>
+
+          <div class="metrics" aria-live="polite">
+            <div class="metric">
+              <small>当前步骤</small>
+              <strong id="metric-step">—</strong>
+            </div>
+            <div class="metric">
+              <small>工具调用</small>
+              <strong id="metric-calls">—</strong>
+            </div>
+            <div class="metric">
+              <small>剩余预算</small>
+              <strong id="metric-budget">—</strong>
+            </div>
+          </div>
+
+          <div id="timeline" class="timeline empty-timeline">
+            <div class="empty-illustration" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <p>填写旅行需求后，六个任务会在这里依次点亮。</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="result-grid">
+        <article class="panel itinerary-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">03 · 行程结果</p>
+              <h2 id="itinerary-title">等待生成行程</h2>
+            </div>
+            <span id="itinerary-city" class="city-stamp">杭州</span>
+          </div>
+
+          <div id="itinerary-empty" class="result-empty">
+            <div class="result-empty-mark">✦</div>
+            <p>执行规划后，天气、地点和路线会在这里汇成一张行程卡。</p>
+          </div>
+
+          <div id="itinerary-content" class="itinerary-content hidden">
+            <section>
+              <div class="result-section-title">
+                <span>天气</span>
+                <small>WEATHER</small>
+              </div>
+              <div id="weather-list" class="weather-list"></div>
+            </section>
+
+            <section>
+              <div class="result-section-title">
+                <span>推荐地点</span>
+                <small>PLACES</small>
+              </div>
+              <div id="place-list" class="place-list"></div>
+            </section>
+
+            <section class="route-block">
+              <div class="route-icon" aria-hidden="true">→</div>
+              <div>
+                <small>推荐路线</small>
+                <strong id="route-copy">—</strong>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <aside class="panel delivery-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">04 · 可靠交付</p>
+              <h2>发送与回执</h2>
+            </div>
+            <span class="secure-label">IDEMPOTENT</span>
+          </div>
+
+          <div class="budget-block">
+            <div>
+              <small>工具预算使用情况</small>
+              <strong id="budget-copy">0 / 10</strong>
+            </div>
+            <div class="budget-track">
+              <span id="budget-bar" style="width: 100%"></span>
+            </div>
+          </div>
+
+          <div class="delivery-actions">
+            <button
+              id="send-button"
+              class="button button-dark"
+              type="button"
+              disabled
+            >
+              发送行程
+            </button>
+            <button
+              id="compensate-button"
+              class="button button-ghost"
+              type="button"
+              disabled
+            >
+              撤销发送
+            </button>
+          </div>
+
+          <div class="receipt-card">
+            <div class="receipt-top">
+              <span>DELIVERY RECEIPT</span>
+              <span id="receipt-status" class="receipt-status">未发送</span>
+            </div>
+            <dl>
+              <div>
+                <dt>回执编号</dt>
+                <dd id="receipt-id">—</dd>
+              </div>
+              <div>
+                <dt>发送尝试</dt>
+                <dd id="send-attempts">—</dd>
+              </div>
+              <div>
+                <dt>幂等命中</dt>
+                <dd id="duplicate-flag">—</dd>
+              </div>
+              <div>
+                <dt>补偿结果</dt>
+                <dd id="compensation-copy">—</dd>
+              </div>
+            </dl>
+          </div>
+
+          <button id="reset-button" class="text-button" type="button">
+            清空当前会话
+          </button>
+        </aside>
+      </section>
+
+      <section class="panel trace-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">05 · 可观测记录</p>
+            <h2>工具审计轨迹</h2>
+          </div>
+          <span class="trace-note">每一步都经统一网关</span>
+        </div>
+        <div id="trace-list" class="trace-list">
+          <p class="trace-empty">还没有工具调用记录。</p>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
