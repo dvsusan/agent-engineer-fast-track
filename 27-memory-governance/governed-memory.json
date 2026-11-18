@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "users": {
+    "alice": {
+      "preferences": {
+        "pace": {
+          "value": "轻松",
+          "source": "user_correction",
+          "version": 2,
+          "recorded_on": "2026-11-16",
+          "status": "active",
+          "expires_on": "2026-12-16"
+        }
+      },
+      "history": [
+        {
+          "key": "pace",
+          "old_value": "极紧凑",
+          "new_value": "轻松",
+          "source": "user_correction",
+          "recorded_on": "2026-11-16"
+        }
+      ]
+    },
+    "bob": {
+      "preferences": {
+        "interests": {
+          "value": "美食",
+          "source": "explicit",
+          "version": 1,
+          "recorded_on": "2026-11-16",
+          "status": "active",
+          "expires_on": null
+        }
+      },
+      "history": []
+    }
+  },
+  "audit": [
+    {
+      "action": "remember",
+      "user_id": "alice",
+      "key": "interests",
+      "actor_id": "alice",
+      "detail": "created，有效期至 2026-11-18",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "remember",
+      "user_id": "alice",
+      "key": "travel_budget",
+      "actor_id": "alice",
+      "detail": "created，有效期至 永久",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "remember",
+      "user_id": "alice",
+      "key": "pace",
+      "actor_id": "alice",
+      "detail": "created，有效期至 2026-12-16",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "remember",
+      "user_id": "bob",
+      "key": "interests",
+      "actor_id": "bob",
+      "detail": "created，有效期至 永久",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "remember",
+      "user_id": "alice",
+      "key": "pace",
+      "actor_id": "alice",
+      "detail": "updated，有效期至 2026-12-16",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "correct",
+      "user_id": "alice",
+      "key": "pace",
+      "actor_id": "alice",
+      "detail": "用户明确更正",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "expire",
+      "user_id": "alice",
+      "key": "interests",
+      "actor_id": "system",
+      "detail": "在 2026-11-19 到期",
+      "recorded_on": "2026-11-16"
+    },
+    {
+      "action": "delete",
+      "user_id": "alice",
+      "key": "travel_budget",
+      "actor_id": "alice",
+      "detail": "用户要求删除预算记忆",
+      "recorded_on": "2026-11-16"
+    }
+  ],
+  "governance_version": 1
+}

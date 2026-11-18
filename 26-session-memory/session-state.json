@@ -1,0 +1,20 @@
+{
+  "session_id": "session-2026-11-16",
+  "user_id": "demo-user",
+  "goal": "规划杭州三日拍照行程",
+  "turn_count": 3,
+  "turns": [
+    {
+      "role": "user",
+      "content": "这次还是去杭州，预算 600，想多走几个拍照点。"
+    },
+    {
+      "role": "assistant",
+      "content": "已记住预算 600 和拍照偏好。"
+    },
+    {
+      "role": "user",
+      "content": "这次节奏改成紧凑一点。"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "budget_unit": "characters",
+  "budget": 500,
+  "used": 179,
+  "remaining": 321,
+  "selected": [
+    {
+      "id": "system-rules",
+      "label": "规则",
+      "kind": "rules",
+      "priority": 100,
+      "required": true,
+      "char_cost": 30
+    },
+    {
+      "id": "current-goal",
+      "label": "目标",
+      "kind": "goal",
+      "priority": 90,
+      "required": true,
+      "char_cost": 35
+    },
+    {
+      "id": "long-term-preferences",
+      "label": "长期偏好",
+      "kind": "memory",
+      "priority": 75,
+      "required": false,
+      "char_cost": 22
+    },
+    {
+      "id": "short-term-session",
+      "label": "短期会话",
+      "kind": "history",
+      "priority": 65,
+      "required": false,
+      "char_cost": 92
+    }
+  ],
+  "omitted": [],
+  "context_text": "[规则]\n只使用已保存偏好和工具证据；偏好冲突时采用用户最新明确要求。\n\n[目标]\n为 demo-user 规划杭州三日拍照行程，预算 600，节奏紧凑。\n\n[长期偏好]\n兴趣：拍照\n旅行节奏：紧凑\n旅行预算：600\n\n[短期会话]\n当前目标：规划杭州三日拍照行程\nuser: 这次还是去杭州，预算 600，想多走几个拍照点。\nassistant: 已记住预算 600 和拍照偏好。\nuser: 这次节奏改成紧凑一点。"
+}

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "users": {
+    "demo-user": {
+      "preferences": {
+        "pace": {
+          "value": "紧凑",
+          "source": "explicit_correction",
+          "version": 2,
+          "recorded_on": "2026-11-16"
+        },
+        "interests": {
+          "value": "拍照",
+          "source": "explicit",
+          "version": 1,
+          "recorded_on": "2026-11-16"
+        },
+        "travel_budget": {
+          "value": "600",
+          "source": "current_session",
+          "version": 1,
+          "recorded_on": "2026-11-16"
+        }
+      },
+      "history": [
+        {
+          "key": "pace",
+          "old_value": "轻松",
+          "new_value": "紧凑",
+          "source": "explicit_correction",
+          "recorded_on": "2026-11-16"
+        }
+      ]
+    }
+  }
+}

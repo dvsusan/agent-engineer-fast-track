@@ -1,0 +1,66 @@
+{
+  "budget_unit": "characters",
+  "budget": 900,
+  "used": 281,
+  "remaining": 619,
+  "selected": [
+    {
+      "id": "system-rules",
+      "label": "规则",
+      "kind": "rules",
+      "priority": 100,
+      "required": true,
+      "char_cost": 58
+    },
+    {
+      "id": "current-goal",
+      "label": "目标",
+      "kind": "goal",
+      "priority": 90,
+      "required": true,
+      "char_cost": 65
+    },
+    {
+      "id": "weather-evidence",
+      "label": "证据｜天气",
+      "kind": "evidence",
+      "priority": 80,
+      "required": true,
+      "char_cost": 65
+    },
+    {
+      "id": "place-evidence",
+      "label": "证据｜地点",
+      "kind": "evidence",
+      "priority": 70,
+      "required": true,
+      "char_cost": 28
+    },
+    {
+      "id": "route-evidence",
+      "label": "证据｜路线",
+      "kind": "evidence",
+      "priority": 60,
+      "required": true,
+      "char_cost": 20
+    },
+    {
+      "id": "history-user",
+      "label": "历史｜用户请求",
+      "kind": "history",
+      "priority": 40,
+      "required": false,
+      "char_cost": 21
+    },
+    {
+      "id": "history-assistant",
+      "label": "历史｜助手回复",
+      "kind": "history",
+      "priority": 30,
+      "required": false,
+      "char_cost": 24
+    }
+  ],
+  "omitted": [],
+  "context_text": "[规则]\n只规划城市和日期范围内的行程；天气、地点和路线必须来自工具结果；不要编造未查询到的信息；发送行程前必须得到用户确认。\n\n[目标]\n城市：杭州；日期：2026-11-15, 2026-11-16, 2026-11-17；偏好：拍照，不想走太多路；工具预算：10。\n\n[证据｜天气]\n2026-11-15：多云，20-25°C\n2026-11-16：多云，20-25°C\n2026-11-17：多云，20-25°C\n\n[证据｜地点]\n西湖：湖景与拍照\n九溪烟树：自然景观\n南宋御街：街区散步\n\n[证据｜路线]\n西湖 → 九溪烟树，步行约 40 分钟。\n\n[历史｜用户请求]\n用户希望这次旅行以拍照为主，并尽量少走路。\n\n[历史｜助手回复]\n助手已经完成天气、地点和路线工具调用，等待汇总。"
+}

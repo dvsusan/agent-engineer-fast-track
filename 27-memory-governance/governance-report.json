@@ -1,0 +1,24 @@
+{
+  "as_of": "2026-11-19",
+  "alice_initial": {
+    "interests": "拍照",
+    "travel_budget": "600",
+    "pace": "极紧凑"
+  },
+  "bob_initial": {
+    "interests": "美食"
+  },
+  "expired_keys": [
+    "interests"
+  ],
+  "deleted_key": {
+    "key": "travel_budget",
+    "status": "deleted",
+    "reason": "用户要求删除预算记忆"
+  },
+  "corrected_pace": "轻松",
+  "alice_final": {
+    "pace": "轻松"
+  },
+  "audit_entries": 8
+}
