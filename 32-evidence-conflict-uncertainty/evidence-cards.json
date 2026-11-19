@@ -1,0 +1,43 @@
+{
+  "sources": [
+    {
+      "id": "museum-official",
+      "title": "浙江省博物馆官方公告摘录",
+      "source_type": "official",
+      "authority": 5,
+      "updated_on": "2026-11-18",
+      "uri": "source-excerpts.md#official",
+      "excerpt": "自 2026 年 11 月 18 日起，浙江省博物馆每周一闭馆，法定节假日除外。",
+      "claims": {
+        "museum_monday_open": false
+      },
+      "conditions": [
+        "法定节假日除外"
+      ]
+    },
+    {
+      "id": "visitor-note",
+      "title": "游客十月参观笔记",
+      "source_type": "community",
+      "authority": 2,
+      "updated_on": "2026-10-19",
+      "uri": "source-excerpts.md#visitor-note",
+      "excerpt": "我在 10 月 19 日周一上午进入浙江省博物馆参观。",
+      "claims": {
+        "museum_monday_open": true
+      },
+      "conditions": []
+    },
+    {
+      "id": "rainy-day-advice",
+      "title": "杭州雨天拍照建议",
+      "source_type": "course",
+      "authority": 4,
+      "updated_on": "2026-11-18",
+      "uri": "source-excerpts.md#rainy-day",
+      "excerpt": "雨天可以优先考虑室内展馆，并在出发前确认预约规则和当天公告。",
+      "claims": {},
+      "conditions": []
+    }
+  ]
+}

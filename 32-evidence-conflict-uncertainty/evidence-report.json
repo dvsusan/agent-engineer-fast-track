@@ -1,0 +1,95 @@
+{
+  "question": "下周一杭州下雨，浙江省博物馆能去拍照吗？",
+  "answer": "按最新官方公告，浙江省博物馆在普通周一闭馆，不建议只按“周一可以参观”做行程安排 [1]。\n较早游客笔记记录过周一入馆 [2]，但它的权威度和更新时间都低于当前公告，这属于需要披露的资料冲突。\n下雨时仍可优先找室内替代点，但出发前需要再次确认当天是否属于法定节假日 [3]。",
+  "citations": [
+    {
+      "number": 1,
+      "evidence_id": "museum-official",
+      "title": "浙江省博物馆官方公告摘录",
+      "source_type": "official",
+      "updated_on": "2026-11-18",
+      "uri": "source-excerpts.md#official"
+    },
+    {
+      "number": 2,
+      "evidence_id": "visitor-note",
+      "title": "游客十月参观笔记",
+      "source_type": "community",
+      "updated_on": "2026-10-19",
+      "uri": "source-excerpts.md#visitor-note"
+    },
+    {
+      "number": 3,
+      "evidence_id": "rainy-day-advice",
+      "title": "杭州雨天拍照建议",
+      "source_type": "course",
+      "updated_on": "2026-11-18",
+      "uri": "source-excerpts.md#rainy-day"
+    }
+  ],
+  "conflicts": [
+    {
+      "claim": "museum_monday_open",
+      "values": [
+        {
+          "evidence_id": "museum-official",
+          "value": false,
+          "authority": 5,
+          "updated_on": "2026-11-18"
+        },
+        {
+          "evidence_id": "visitor-note",
+          "value": true,
+          "authority": 2,
+          "updated_on": "2026-10-19"
+        }
+      ]
+    }
+  ],
+  "conflict_resolutions": [
+    {
+      "claim": "museum_monday_open",
+      "winner": {
+        "evidence_id": "museum-official",
+        "value": false,
+        "authority": 5,
+        "updated_on": "2026-11-18"
+      },
+      "runner_up": {
+        "evidence_id": "visitor-note",
+        "value": true,
+        "authority": 2,
+        "updated_on": "2026-10-19"
+      },
+      "confidence": "high"
+    }
+  ],
+  "uncertainty": {
+    "level": "medium",
+    "reasons": [
+      "检索证据中存在开放规则冲突",
+      "官方规则包含例外：法定节假日除外",
+      "问题没有说明下周一是普通日还是法定节假日"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "museum-official",
+      "title": "浙江省博物馆官方公告摘录",
+      "score": 0.5015,
+      "updated_on": "2026-11-18"
+    },
+    {
+      "id": "visitor-note",
+      "title": "游客十月参观笔记",
+      "score": 0.3307,
+      "updated_on": "2026-10-19"
+    },
+    {
+      "id": "rainy-day-advice",
+      "title": "杭州雨天拍照建议",
+      "score": 0.1783,
+      "updated_on": "2026-11-18"
+    }
+  ]
+}

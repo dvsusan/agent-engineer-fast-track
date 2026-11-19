@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "doc_id": "hotel-budget-private",
+      "title": "Alice 西湖酒店预算单",
+      "trip_id": "hz-2026",
+      "version": 1,
+      "updated_at": "2026-11-18T09:00:00+08:00",
+      "acl": {
+        "allowed_users": ["alice"],
+        "allowed_roles": []
+      },
+      "text": "Alice 已确认的湖滨酒店价格为 1280 元/晚，含双早。"
+    },
+    {
+      "doc_id": "hotel-budget-public",
+      "title": "杭州住宿费用参考",
+      "trip_id": "hz-2026",
+      "version": 1,
+      "updated_at": "2026-11-16T10:00:00+08:00",
+      "acl": {
+        "allowed_users": [],
+        "allowed_roles": ["owner", "planner", "member"]
+      },
+      "text": "西湖周边普通酒店平日预算约 600 到 900 元/晚，周末通常会上浮。"
+    },
+    {
+      "doc_id": "rain-route",
+      "title": "龙翔桥站雨天出站路线",
+      "trip_id": "hz-2026",
+      "version": 1,
+      "updated_at": "2026-11-17T08:30:00+08:00",
+      "acl": {
+        "allowed_users": [],
+        "allowed_roles": ["owner", "planner", "member"]
+      },
+      "text": "龙翔桥地铁站 C 口临时关闭，雨天请从 B 口出站，步行约 8 分钟到西湖。"
+    },
+    {
+      "doc_id": "photographer-spot",
+      "title": "雨天摄影集合点",
+      "trip_id": "hz-2026",
+      "version": 1,
+      "updated_at": "2026-11-18T08:00:00+08:00",
+      "acl": {
+        "allowed_users": [],
+        "allowed_roles": ["owner", "planner"]
+      },
+      "text": "雨天摄影集合点在湖滨步行街北侧连廊，只对行程负责人和规划者开放。"
+    },
+    {
+      "doc_id": "other-trip-hotel",
+      "title": "2027 杭州西湖酒店预算参考",
+      "trip_id": "hz-2027",
+      "version": 1,
+      "updated_at": "2026-11-18T11:00:00+08:00",
+      "acl": {
+        "allowed_users": [],
+        "allowed_roles": ["owner", "planner", "member"]
+      },
+      "text": "2027 年西湖周边酒店参考预算为 900 到 1200 元/晚。"
+    }
+  ]
+}

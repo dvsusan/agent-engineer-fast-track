@@ -1,0 +1,93 @@
+{
+  "database": {
+    "postgresql": "PostgreSQL 17.6 (Postgres.app) on aarch64-apple-darwin23.6.0",
+    "pgvector": "0.8.0",
+    "version_counts": [
+      {
+        "version": "2026-11-16",
+        "count": 10
+      },
+      {
+        "version": "2026-11-18",
+        "count": 2
+      }
+    ]
+  },
+  "dsn_database": "tripilot_rag_30",
+  "initial_version": "2026-11-16",
+  "initial_rows": 12,
+  "metadata_filter": {
+    "city": "杭州",
+    "doc_ids": [
+      "rainy-day",
+      "west-lake-map"
+    ],
+    "access_group": "travel-public",
+    "candidate_count": 5
+  },
+  "before_hits": [
+    {
+      "chunk_id": "rainy-day-01",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "# 杭州雨天拍照备选\n\n## 室内与半室内地点\n\n杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。\n\n## 短距离安排\n\n如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市",
+      "metadata": {
+        "end": 180,
+        "start": 0,
+        "overlap_chars": 30
+      },
+      "score": 0.38796483134804216
+    },
+    {
+      "chunk_id": "rainy-day-02",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。\n\n## 安全与设备\n\n雨天路面湿滑，九溪烟树等自然步道应减少停留。相机和手机需要防水保护，镜头起雾时不要频繁擦拭。雷电天气不要前往空旷水边。\n\n## 证据过期提醒\n\n开放时间、预约规则和交通班次可能变化。回答时应标注资料日期，并提醒用户在出发前查看官方公告。",
+      "metadata": {
+        "end": 311,
+        "start": 150,
+        "overlap_chars": 30
+      },
+      "score": 0.23436093050735107
+    },
+    {
+      "chunk_id": "west-lake-map-02",
+      "doc_id": "west-lake-map",
+      "strategy": "map_landmark",
+      "content": "西湖地图说明\n## 西湖音乐喷泉\n西湖音乐喷泉适合傍晚拍照，开放安排可能调整。出发前应查看当天公告，不要只依赖旧攻略。",
+      "metadata": {
+        "landmark": "西湖音乐喷泉"
+      },
+      "score": 0.07704167410110485
+    }
+  ],
+  "updated_version": "2026-11-18",
+  "updated_rows": 2,
+  "deleted_old_rows": 2,
+  "after_hits": [
+    {
+      "chunk_id": "rainy-day-01",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "# 杭州雨天拍照备选\n\n## 室内与半室内地点\n\n杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。\n\n## 短距离安排\n\n如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "end": 180,
+        "start": 0,
+        "overlap_chars": 30
+      },
+      "score": 0.38433751697280094
+    },
+    {
+      "chunk_id": "rainy-day-02",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。\n\n## 安全与设备\n\n雨天路面湿滑，九溪烟树等自然步道应减少停留。相机和手机需要防水保护，镜头起雾时不要频繁擦拭。雷电天气不要前往空旷水边。\n\n## 证据过期提醒\n\n开放时间、预约规则和交通班次可能变化。回答时应标注资料日期，并提醒用户在出发前查看官方公告。\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "end": 311,
+        "start": 150,
+        "overlap_chars": 30
+      },
+      "score": 0.25249026007805275
+    }
+  ]
+}

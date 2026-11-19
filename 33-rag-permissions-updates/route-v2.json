@@ -1,0 +1,16 @@
+{
+  "documents": [
+    {
+      "doc_id": "rain-route",
+      "title": "龙翔桥站雨天出站路线",
+      "trip_id": "hz-2026",
+      "version": 2,
+      "updated_at": "2026-11-18T12:00:00+08:00",
+      "acl": {
+        "allowed_users": [],
+        "allowed_roles": ["owner", "planner", "member"]
+      },
+      "text": "龙翔桥地铁站 C 口已经恢复，B 口因施工关闭，雨天请从 C 口出站，步行约 6 分钟到西湖。"
+    }
+  ]
+}

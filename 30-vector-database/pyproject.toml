@@ -1,0 +1,8 @@
+[project]
+name = "tripilot-pgvector"
+version = "0.1.0"
+description = "TripPilot chapter 30 PostgreSQL pgvector demo"
+requires-python = ">=3.15"
+dependencies = [
+    "psycopg[binary]==3.3.9",
+]

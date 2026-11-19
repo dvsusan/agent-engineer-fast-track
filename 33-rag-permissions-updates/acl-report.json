@@ -1,0 +1,522 @@
+{
+  "checks": {
+    "alice_sees_private_budget": true,
+    "bob_cannot_see_private_budget": true,
+    "bob_gets_public_budget": true,
+    "planner_doc_allowed_for_alice": true,
+    "planner_doc_denied_for_bob": true,
+    "same_scope_cache_hits": true,
+    "version_update_invalidates_cache": true,
+    "updated_route_visible": true,
+    "old_route_not_reused": true,
+    "ttl_expires_cache": true,
+    "v1_answer_stable_before_update": true,
+    "cached_answer_stable": true,
+    "expired_answer_refreshed": true
+  },
+  "cache": {
+    "ttl_seconds": 300,
+    "site_hits": 1,
+    "site_misses": 7,
+    "revision_invalidations": 1,
+    "ttl_expirations": 1
+  },
+  "scenarios": [
+    {
+      "name": "Alice 读取私有预算",
+      "principal": "alice",
+      "question": "西湖附近酒店预算多少？",
+      "result": {
+        "answer": "Alice 已确认的湖滨酒店价格为 1280 元/晚，含双早。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "hotel-budget-private",
+            "title": "Alice 西湖酒店预算单",
+            "version": 1,
+            "updated_at": "2026-11-18T09:00:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "西湖附近酒店预算多少？",
+        "principal": {
+          "user_id": "alice",
+          "trip_id": "hz-2026",
+          "roles": [
+            "owner",
+            "planner"
+          ]
+        },
+        "index_revision": 5,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public",
+            "photographer-spot",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public"
+          ],
+          "scores": {
+            "hotel-budget-private": {
+              "score": 0.4213,
+              "term_overlap": 4
+            },
+            "hotel-budget-public": {
+              "score": 0.3131,
+              "term_overlap": 3
+            }
+          }
+        },
+        "cache": {
+          "status": "miss",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "Bob 被 ACL 拦截私有预算",
+      "principal": "bob",
+      "question": "西湖附近酒店预算多少？",
+      "result": {
+        "answer": "西湖周边普通酒店平日预算约 600 到 900 元/晚，周末通常会上浮。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "hotel-budget-public",
+            "title": "杭州住宿费用参考",
+            "version": 1,
+            "updated_at": "2026-11-16T10:00:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "西湖附近酒店预算多少？",
+        "principal": {
+          "user_id": "bob",
+          "trip_id": "hz-2026",
+          "roles": [
+            "member"
+          ]
+        },
+        "index_revision": 5,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-public",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "hotel-budget-private",
+              "version": 1,
+              "decision": "deny",
+              "reason": "user_not_allowed"
+            },
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            },
+            {
+              "doc_id": "photographer-spot",
+              "version": 1,
+              "decision": "deny",
+              "reason": "role_not_allowed"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "hotel-budget-public"
+          ],
+          "scores": {
+            "hotel-budget-public": {
+              "score": 0.3131,
+              "term_overlap": 3
+            }
+          }
+        },
+        "cache": {
+          "status": "miss",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "Alice 读取规划者资料",
+      "principal": "alice",
+      "question": "雨天摄影集合点在哪里？",
+      "result": {
+        "answer": "雨天摄影集合点在湖滨步行街北侧连廊，只对行程负责人和规划者开放。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "photographer-spot",
+            "title": "雨天摄影集合点",
+            "version": 1,
+            "updated_at": "2026-11-18T08:00:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "雨天摄影集合点在哪里？",
+        "principal": {
+          "user_id": "alice",
+          "trip_id": "hz-2026",
+          "roles": [
+            "owner",
+            "planner"
+          ]
+        },
+        "index_revision": 5,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public",
+            "photographer-spot",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "photographer-spot"
+          ],
+          "scores": {
+            "photographer-spot": {
+              "score": 0.3578,
+              "term_overlap": 7
+            }
+          }
+        },
+        "cache": {
+          "status": "miss",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "Bob 被角色 ACL 拦截",
+      "principal": "bob",
+      "question": "雨天摄影集合点在哪里？",
+      "result": {
+        "answer": "没有检索到你有权限查看、且足够可靠的旅行资料，暂时无法回答。",
+        "citations": []
+      },
+      "trace": {
+        "question": "雨天摄影集合点在哪里？",
+        "principal": {
+          "user_id": "bob",
+          "trip_id": "hz-2026",
+          "roles": [
+            "member"
+          ]
+        },
+        "index_revision": 5,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-public",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "hotel-budget-private",
+              "version": 1,
+              "decision": "deny",
+              "reason": "user_not_allowed"
+            },
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            },
+            {
+              "doc_id": "photographer-spot",
+              "version": 1,
+              "decision": "deny",
+              "reason": "role_not_allowed"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [],
+          "scores": {}
+        },
+        "cache": {
+          "status": "miss",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "路线 v1 首次查询",
+      "principal": "alice",
+      "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+      "result": {
+        "answer": "龙翔桥地铁站 C 口临时关闭，雨天请从 B 口出站，步行约 8 分钟到西湖。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "rain-route",
+            "title": "龙翔桥站雨天出站路线",
+            "version": 1,
+            "updated_at": "2026-11-17T08:30:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+        "principal": {
+          "user_id": "alice",
+          "trip_id": "hz-2026",
+          "roles": [
+            "owner",
+            "planner"
+          ]
+        },
+        "index_revision": 5,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public",
+            "photographer-spot",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "rain-route"
+          ],
+          "scores": {
+            "rain-route": {
+              "score": 0.4804,
+              "term_overlap": 5
+            }
+          }
+        },
+        "cache": {
+          "status": "miss",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "路线 v1 缓存命中",
+      "principal": "alice",
+      "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+      "result": {
+        "answer": "龙翔桥地铁站 C 口临时关闭，雨天请从 B 口出站，步行约 8 分钟到西湖。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "rain-route",
+            "title": "龙翔桥站雨天出站路线",
+            "version": 1,
+            "updated_at": "2026-11-17T08:30:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+        "principal": {
+          "user_id": "alice",
+          "trip_id": "hz-2026",
+          "roles": [
+            "owner",
+            "planner"
+          ]
+        },
+        "index_revision": 5,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public",
+            "photographer-spot",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "rain-route"
+          ],
+          "scores": {
+            "rain-route": {
+              "score": 0.4804,
+              "term_overlap": 5
+            }
+          }
+        },
+        "cache": {
+          "status": "hit",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "发布 v2 后重新查询",
+      "principal": "alice",
+      "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+      "result": {
+        "answer": "龙翔桥地铁站 C 口已经恢复，B 口因施工关闭，雨天请从 C 口出站，步行约 6 分钟到西湖。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "rain-route",
+            "title": "龙翔桥站雨天出站路线",
+            "version": 2,
+            "updated_at": "2026-11-18T12:00:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+        "principal": {
+          "user_id": "alice",
+          "trip_id": "hz-2026",
+          "roles": [
+            "owner",
+            "planner"
+          ]
+        },
+        "index_revision": 6,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public",
+            "photographer-spot",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "rain-route"
+          ],
+          "scores": {
+            "rain-route": {
+              "score": 0.4334,
+              "term_overlap": 5
+            }
+          }
+        },
+        "cache": {
+          "status": "index_revision_changed",
+          "ttl_seconds": 300
+        }
+      }
+    },
+    {
+      "name": "超过 TTL 后重新查询",
+      "principal": "alice",
+      "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+      "result": {
+        "answer": "龙翔桥地铁站 C 口已经恢复，B 口因施工关闭，雨天请从 C 口出站，步行约 6 分钟到西湖。 [1]",
+        "citations": [
+          {
+            "number": 1,
+            "doc_id": "rain-route",
+            "title": "龙翔桥站雨天出站路线",
+            "version": 2,
+            "updated_at": "2026-11-18T12:00:00+08:00"
+          }
+        ]
+      },
+      "trace": {
+        "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+        "principal": {
+          "user_id": "alice",
+          "trip_id": "hz-2026",
+          "roles": [
+            "owner",
+            "planner"
+          ]
+        },
+        "index_revision": 6,
+        "acl": {
+          "evaluated": 5,
+          "allowed_doc_ids": [
+            "hotel-budget-private",
+            "hotel-budget-public",
+            "photographer-spot",
+            "rain-route"
+          ],
+          "denied": [
+            {
+              "doc_id": "other-trip-hotel",
+              "version": 1,
+              "decision": "deny",
+              "reason": "different_trip"
+            }
+          ]
+        },
+        "retrieval": {
+          "candidate_doc_ids": [
+            "rain-route"
+          ],
+          "scores": {
+            "rain-route": {
+              "score": 0.4334,
+              "term_overlap": 5
+            }
+          }
+        },
+        "cache": {
+          "status": "ttl_expired",
+          "ttl_seconds": 300
+        }
+      }
+    }
+  ]
+}

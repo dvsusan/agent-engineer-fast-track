@@ -1,0 +1,248 @@
+{
+  "mode": "offline",
+  "query_rewrite": {
+    "original": "下雨了想拍照，但腿不想太累，去哪？",
+    "rewritten": "下雨了想拍照，但腿不想太累，去哪？ 雨天 室内 博物馆 摄影 景点 少步行 短距离 公交",
+    "expansions": [
+      "雨天",
+      "室内",
+      "博物馆",
+      "摄影",
+      "景点",
+      "少步行",
+      "短距离",
+      "公交"
+    ]
+  },
+  "vector_top": [
+    {
+      "chunk_id": "rainy-day-01",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "# 杭州雨天拍照备选\n\n## 室内与半室内地点\n\n杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。\n\n## 短距离安排\n\n如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "start": 0,
+        "end": 180,
+        "overlap_chars": 30
+      },
+      "version": "2026-11-18",
+      "vector_score": 0.4828324549431839,
+      "keyword_coverage": 0.5454545454545454,
+      "hybrid_score": 0.5016190820965923,
+      "rerank_score": 0.468032493390626
+    },
+    {
+      "chunk_id": "rainy-day-02",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。\n\n## 安全与设备\n\n雨天路面湿滑，九溪烟树等自然步道应减少停留。相机和手机需要防水保护，镜头起雾时不要频繁擦拭。雷电天气不要前往空旷水边。\n\n## 证据过期提醒\n\n开放时间、预约规则和交通班次可能变化。回答时应标注资料日期，并提醒用户在出发前查看官方公告。\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "start": 150,
+        "end": 311,
+        "overlap_chars": 30
+      },
+      "version": "2026-11-18",
+      "vector_score": 0.3746936364531346,
+      "keyword_coverage": 0.2727272727272727,
+      "hybrid_score": 0.344103727335376,
+      "rerank_score": 0.3089868864106229
+    },
+    {
+      "chunk_id": "hangzhou-guide-01",
+      "doc_id": "hangzhou-guide",
+      "strategy": "markdown_section",
+      "content": "杭州旅行攻略\n## 拍照路线\n西湖适合清晨拍照，九溪烟树适合下午散步。拍照路线应尽量缩短步行距离，并为阴雨天保留室内替代点。",
+      "metadata": {
+        "section": "拍照路线"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.25431378189777376,
+      "keyword_coverage": 0.22727272727272727,
+      "hybrid_score": 0.2462014655102598,
+      "rerank_score": 0.22274200822360393
+    },
+    {
+      "chunk_id": "transport-01",
+      "doc_id": "transport",
+      "strategy": "table_row",
+      "content": "杭州交通表\n| 起点 | 终点 | 方式 | 预计时间 | 备注 |\n| 西湖 | 浙江省博物馆 | 步行 | 18 分钟 | 雨天可改乘公交 |",
+      "metadata": {
+        "row": 1,
+        "header_preserved": true
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.23129786895610538,
+      "keyword_coverage": 0.22727272727272727,
+      "hybrid_score": 0.23009032645109193,
+      "rerank_score": 0.20865865392922803
+    },
+    {
+      "chunk_id": "west-lake-map-01",
+      "doc_id": "west-lake-map",
+      "strategy": "map_landmark",
+      "content": "西湖地图说明\n## 浙江省博物馆\n浙江省博物馆位于西湖文化区域，适合雨天参观。室内展览丰富，从西湖附近步行前往不需要长距离换乘。",
+      "metadata": {
+        "landmark": "浙江省博物馆"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.2275916193656512,
+      "keyword_coverage": 0.2727272727272727,
+      "hybrid_score": 0.24113231537413765,
+      "rerank_score": 0.22975832743969415
+    },
+    {
+      "chunk_id": "hangzhou-guide-02",
+      "doc_id": "hangzhou-guide",
+      "strategy": "markdown_section",
+      "content": "杭州旅行攻略\n## 预算建议\n两到三天的杭州市内旅行，交通和普通餐饮可以控制在 600 元到 900 元。预算紧张时，优先保留公共交通和免费景点。",
+      "metadata": {
+        "section": "预算建议"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.18531514972720672,
+      "keyword_coverage": 0.045454545454545456,
+      "hybrid_score": 0.14335696844540835,
+      "rerank_score": 0.11833590815223809
+    }
+  ],
+  "lexical_top": [
+    {
+      "chunk_id": "rainy-day-01",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "# 杭州雨天拍照备选\n\n## 室内与半室内地点\n\n杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。\n\n## 短距离安排\n\n如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "start": 0,
+        "end": 180,
+        "overlap_chars": 30
+      },
+      "version": "2026-11-18",
+      "vector_score": 0.4828324549431839,
+      "keyword_coverage": 0.5454545454545454,
+      "hybrid_score": 0.5016190820965923,
+      "rerank_score": 0.468032493390626
+    },
+    {
+      "chunk_id": "rainy-day-02",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。\n\n## 安全与设备\n\n雨天路面湿滑，九溪烟树等自然步道应减少停留。相机和手机需要防水保护，镜头起雾时不要频繁擦拭。雷电天气不要前往空旷水边。\n\n## 证据过期提醒\n\n开放时间、预约规则和交通班次可能变化。回答时应标注资料日期，并提醒用户在出发前查看官方公告。\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "start": 150,
+        "end": 311,
+        "overlap_chars": 30
+      },
+      "version": "2026-11-18",
+      "vector_score": 0.3746936364531346,
+      "keyword_coverage": 0.2727272727272727,
+      "hybrid_score": 0.344103727335376,
+      "rerank_score": 0.3089868864106229
+    },
+    {
+      "chunk_id": "west-lake-map-01",
+      "doc_id": "west-lake-map",
+      "strategy": "map_landmark",
+      "content": "西湖地图说明\n## 浙江省博物馆\n浙江省博物馆位于西湖文化区域，适合雨天参观。室内展览丰富，从西湖附近步行前往不需要长距离换乘。",
+      "metadata": {
+        "landmark": "浙江省博物馆"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.2275916193656512,
+      "keyword_coverage": 0.2727272727272727,
+      "hybrid_score": 0.24113231537413765,
+      "rerank_score": 0.22975832743969415
+    },
+    {
+      "chunk_id": "hangzhou-guide-01",
+      "doc_id": "hangzhou-guide",
+      "strategy": "markdown_section",
+      "content": "杭州旅行攻略\n## 拍照路线\n西湖适合清晨拍照，九溪烟树适合下午散步。拍照路线应尽量缩短步行距离，并为阴雨天保留室内替代点。",
+      "metadata": {
+        "section": "拍照路线"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.25431378189777376,
+      "keyword_coverage": 0.22727272727272727,
+      "hybrid_score": 0.2462014655102598,
+      "rerank_score": 0.22274200822360393
+    },
+    {
+      "chunk_id": "transport-01",
+      "doc_id": "transport",
+      "strategy": "table_row",
+      "content": "杭州交通表\n| 起点 | 终点 | 方式 | 预计时间 | 备注 |\n| 西湖 | 浙江省博物馆 | 步行 | 18 分钟 | 雨天可改乘公交 |",
+      "metadata": {
+        "row": 1,
+        "header_preserved": true
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.23129786895610538,
+      "keyword_coverage": 0.22727272727272727,
+      "hybrid_score": 0.23009032645109193,
+      "rerank_score": 0.20865865392922803
+    },
+    {
+      "chunk_id": "west-lake-map-03",
+      "doc_id": "west-lake-map",
+      "strategy": "map_landmark",
+      "content": "西湖地图说明\n## 九溪烟树\n九溪烟树以溪流和树林景观为主，适合自然摄影。雨天路面湿滑，不建议安排长距离步行。",
+      "metadata": {
+        "landmark": "九溪烟树"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.06577144670108427,
+      "keyword_coverage": 0.18181818181818182,
+      "hybrid_score": 0.10058546723621353,
+      "rerank_score": 0.11071182769988741
+    }
+  ],
+  "merged_count": 7,
+  "reranked": [
+    {
+      "chunk_id": "rainy-day-01",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "# 杭州雨天拍照备选\n\n## 室内与半室内地点\n\n杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。\n\n## 短距离安排\n\n如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "start": 0,
+        "end": 180,
+        "overlap_chars": 30
+      },
+      "version": "2026-11-18",
+      "vector_score": 0.4828324549431839,
+      "keyword_coverage": 0.5454545454545454,
+      "hybrid_score": 0.5016190820965923,
+      "rerank_score": 0.468032493390626
+    },
+    {
+      "chunk_id": "rainy-day-02",
+      "doc_id": "rainy-day",
+      "strategy": "overlap_window",
+      "content": "天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。\n\n## 安全与设备\n\n雨天路面湿滑，九溪烟树等自然步道应减少停留。相机和手机需要防水保护，镜头起雾时不要频繁擦拭。雷电天气不要前往空旷水边。\n\n## 证据过期提醒\n\n开放时间、预约规则和交通班次可能变化。回答时应标注资料日期，并提醒用户在出发前查看官方公告。\n2026-11-18 更新：浙江省博物馆周一闭馆，出发前请预约。",
+      "metadata": {
+        "start": 150,
+        "end": 311,
+        "overlap_chars": 30
+      },
+      "version": "2026-11-18",
+      "vector_score": 0.3746936364531346,
+      "keyword_coverage": 0.2727272727272727,
+      "hybrid_score": 0.344103727335376,
+      "rerank_score": 0.3089868864106229
+    },
+    {
+      "chunk_id": "west-lake-map-01",
+      "doc_id": "west-lake-map",
+      "strategy": "map_landmark",
+      "content": "西湖地图说明\n## 浙江省博物馆\n浙江省博物馆位于西湖文化区域，适合雨天参观。室内展览丰富，从西湖附近步行前往不需要长距离换乘。",
+      "metadata": {
+        "landmark": "浙江省博物馆"
+      },
+      "version": "2026-11-16",
+      "vector_score": 0.2275916193656512,
+      "keyword_coverage": 0.2727272727272727,
+      "hybrid_score": 0.24113231537413765,
+      "rerank_score": 0.22975832743969415
+    }
+  ]
+}
