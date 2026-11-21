@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "users": {
+    "alice": {
+      "preferences": {
+        "pace": {
+          "value": "轻松",
+          "source": "planner",
+          "version": 1,
+          "recorded_on": "2026-11-21"
+        },
+        "interests": {
+          "value": "博物馆",
+          "source": "planner",
+          "version": 2,
+          "recorded_on": "2026-11-21"
+        },
+        "travel_budget": {
+          "value": "900",
+          "source": "planner",
+          "version": 2,
+          "recorded_on": "2026-11-21"
+        }
+      },
+      "history": [
+        {
+          "key": "interests",
+          "old_value": "自然、博物馆",
+          "new_value": "博物馆",
+          "source": "planner",
+          "recorded_on": "2026-11-21"
+        },
+        {
+          "key": "travel_budget",
+          "old_value": "3600",
+          "new_value": "900",
+          "source": "planner",
+          "recorded_on": "2026-11-21"
+        }
+      ]
+    },
+    "bob": {
+      "preferences": {
+        "pace": {
+          "value": "轻松",
+          "source": "planner",
+          "version": 1,
+          "recorded_on": "2026-11-21"
+        },
+        "interests": {
+          "value": "博物馆",
+          "source": "planner",
+          "version": 1,
+          "recorded_on": "2026-11-21"
+        },
+        "travel_budget": {
+          "value": "900",
+          "source": "planner",
+          "version": 1,
+          "recorded_on": "2026-11-21"
+        }
+      },
+      "history": []
+    }
+  }
+}

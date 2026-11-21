@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="TripPilot 智能旅行规划工作台：输入旅行目标，观察 Agent 调用工具、检索证据、生成行程并应用权限与长期偏好。"
+    />
+    <title>TripPilot · 智能旅行规划工作台</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a'/%3E%3Cpath d='M8 22c4-2 5-7 8-12 3 5 4 10 8 12' fill='none' stroke='%2360a5fa' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='15' r='2.4' fill='%2334d399'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <a class="brand" href="#planner" aria-label="TripPilot 智能旅行规划工作台">
+            <span class="logo-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span class="brand-copy">
+              <strong>TripPilot</strong>
+              <small>智能旅行规划</small>
+            </span>
+          </a>
+
+          <button class="workspace-card" type="button" aria-label="当前旅行工作区">
+            <span class="workspace-icon" aria-hidden="true">HZ</span>
+            <span class="workspace-copy">
+              <small>当前行程</small>
+              <strong>hz-2026</strong>
+              <span>杭州 · 本地 Agent</span>
+            </span>
+            <span class="workspace-chevron" aria-hidden="true">⌄</span>
+          </button>
+
+          <nav class="primary-nav" aria-label="工作台导航">
+            <p class="nav-label">工作台</p>
+            <a class="nav-item active" href="#planner" aria-current="page">
+              <span class="nav-icon" aria-hidden="true">✦</span>
+              <span>智能规划</span>
+            </a>
+            <a class="nav-item" href="#itinerary">
+              <span class="nav-icon" aria-hidden="true">◷</span>
+              <span>行程方案</span>
+              <span id="nav-day-count" class="nav-badge">2</span>
+            </a>
+            <a class="nav-item" href="#evidence">
+              <span class="nav-icon" aria-hidden="true">§</span>
+              <span>证据与权限</span>
+              <span id="nav-evidence-count" class="nav-badge">0</span>
+            </a>
+            <a class="nav-item" href="#validation">
+              <span class="nav-icon" aria-hidden="true">✓</span>
+              <span>自动校验</span>
+              <span id="nav-check-count" class="nav-badge">0</span>
+            </a>
+          </nav>
+
+          <div class="sidebar-section">
+            <p class="nav-label">Agent 状态</p>
+            <div class="agent-health-card">
+              <div class="agent-health-head">
+                <span class="run-status-dot" aria-hidden="true"></span>
+                <strong>工具链路在线</strong>
+              </div>
+              <dl class="agent-health-grid">
+                <div><dt>工具预算</dt><dd id="sidebar-budget">40</dd></div>
+                <div><dt>证据</dt><dd id="sidebar-evidence">待运行</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="environment-row">
+            <span class="environment-dot" aria-hidden="true"></span>
+            <div>
+              <strong>本地安全沙箱</strong>
+              <span>ACL · 记忆 · 审计</span>
+            </div>
+          </div>
+          <div class="operator-card">
+            <span id="sidebar-avatar" class="operator-avatar">A</span>
+            <div>
+              <strong id="sidebar-user">Alice</strong>
+              <span id="sidebar-role">行程所有者</span>
+            </div>
+            <span class="operator-more" aria-hidden="true">•••</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-shell">
+        <header class="topbar">
+          <div class="breadcrumbs" aria-label="面包屑">
+            <span>TripPilot</span><span class="crumb-separator">/</span>
+            <span>杭州行程</span><span class="crumb-separator">/</span>
+            <strong>智能规划</strong>
+          </div>
+          <div class="topbar-actions">
+            <span class="environment-chip"><span class="chip-dot" aria-hidden="true"></span>本地</span>
+            <span class="version-chip">Agent V2</span>
+            <button id="export-button" class="button button-secondary" type="button">
+              <span aria-hidden="true">↓</span>导出行程
+            </button>
+            <button id="run-button" class="button button-primary" type="button">
+              <span class="run-icon" aria-hidden="true">✦</span>
+              <span class="run-label">开始规划</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="content" aria-live="polite">
+          <section id="planner" class="planner-hero">
+            <div class="hero-copy">
+              <p class="eyebrow">AI TRAVEL AGENT · 可执行、可解释、可审计</p>
+              <h1>把一句旅行想法，变成一份可执行行程</h1>
+              <p class="page-description">
+                选择同行身份并描述目标。Agent 会查询天气、筛选地点、估算路线、检索权限证据、读取长期偏好，再生成逐日行程。
+              </p>
+              <div class="hero-proof" aria-label="能力标签">
+                <span>Function Calling</span><span>RAG 引用</span><span>ACL 权限</span><span>长期记忆</span>
+              </div>
+            </div>
+            <div class="hero-status-card">
+              <span class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i></span>
+              <div>
+                <small>本次 Agent</small>
+                <strong>规划完成度</strong>
+                <span id="hero-progress-text">等待生成</span>
+              </div>
+              <div class="progress-ring" id="hero-progress" style="--progress: 0"><span>0%</span></div>
+            </div>
+          </section>
+
+          <section class="planner-grid">
+            <form id="plan-form" class="panel planner-form">
+              <div class="panel-header compact-header">
+                <div>
+                  <span class="section-kicker">01 · 描述需求</span>
+                  <h2>你准备怎么玩？</h2>
+                </div>
+                <span id="form-user-scope" class="status-chip neutral">Alice · 所有者</span>
+              </div>
+
+              <label class="field-label" for="prompt-input">自然语言需求</label>
+              <div class="prompt-shell">
+                <textarea id="prompt-input" rows="4" maxlength="500" placeholder="例如：周末去杭州两天，喜欢拍照和美食，节奏轻松，总预算 3000 元"></textarea>
+                <div class="prompt-footer">
+                  <span>可自动识别天数、预算、节奏和兴趣</span>
+                  <span id="prompt-count">0 / 500</span>
+                </div>
+              </div>
+
+              <div class="sample-prompts" id="sample-prompts" aria-label="示例需求"></div>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span>同行身份</span>
+                  <select id="user-select" name="user_id">
+                    <option value="alice">Alice · 行程所有者</option>
+                    <option value="bob">Bob · 同行成员</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>出发日期</span>
+                  <input id="date-input" name="start_date" type="date" />
+                </label>
+                <label class="field">
+                  <span>旅行天数</span>
+                  <select id="days-select" name="days">
+                    <option value="1">1 天 · 当日往返</option>
+                    <option value="2" selected>2 天 · 周末</option>
+                    <option value="3">3 天 · 小长假</option>
+                    <option value="4">4 天 · 深度游</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>总预算（元）</span>
+                  <input id="budget-input" name="budget" type="number" min="500" max="50000" step="100" value="3000" />
+                </label>
+              </div>
+
+              <fieldset class="choice-fieldset">
+                <legend>旅行节奏</legend>
+                <div class="segmented-control pace-control" id="pace-control" role="group" aria-label="旅行节奏"></div>
+              </fieldset>
+
+              <fieldset class="choice-fieldset">
+                <legend>兴趣主题 <span>最多 4 项</span></legend>
+                <div class="interest-grid" id="interest-grid"></div>
+              </fieldset>
+
+              <div class="form-switches">
+                <label class="switch-row">
+                  <input id="rain-checkbox" type="checkbox" />
+                  <span class="switch-control" aria-hidden="true"></span>
+                  <span><strong>雨天优先</strong><small>优先室内展馆和少步行路线</small></span>
+                </label>
+                <label class="switch-row">
+                  <input id="remember-checkbox" type="checkbox" checked />
+                  <span class="switch-control" aria-hidden="true"></span>
+                  <span><strong>记住偏好</strong><small>将本次节奏和兴趣写入长期记忆</small></span>
+                </label>
+                <label class="switch-row">
+                  <input id="failure-checkbox" type="checkbox" />
+                  <span class="switch-control" aria-hidden="true"></span>
+                  <span><strong>模拟工具超时</strong><small>让天气工具失败一次，观察降级与恢复</small></span>
+                </label>
+              </div>
+
+              <button id="submit-button" class="button button-primary submit-button" type="submit">
+                <span aria-hidden="true">✦</span>
+                <span>生成可执行行程</span>
+              </button>
+              <p class="form-note">演示环境使用本地工具和课程证据库，不会产生真实预订或费用。</p>
+            </form>
+
+            <section class="panel agent-panel" aria-label="Agent 执行轨迹">
+              <div class="panel-header compact-header">
+                <div>
+                  <span class="section-kicker">02 · Agent 执行</span>
+                  <h2>思考与工具轨迹</h2>
+                </div>
+                <span id="agent-status" class="status-chip neutral">待运行</span>
+              </div>
+              <div class="agent-metrics">
+                <div><span>工具调用</span><strong id="metric-tools">0</strong></div>
+                <div><span>预算消耗</span><strong id="metric-tool-budget">0 / 40</strong></div>
+                <div><span>总耗时</span><strong id="metric-elapsed">—</strong></div>
+              </div>
+              <ol id="agent-trace" class="agent-trace">
+                <li class="trace-placeholder">
+                  <span class="trace-dot"></span>
+                  <div><strong>Agent 等待任务</strong><p>提交旅行需求后，这里会展示每一步工具调用、参数与结果。</p></div>
+                </li>
+              </ol>
+              <div id="agent-error" class="inline-error hidden" role="alert"></div>
+            </section>
+          </section>
+
+          <section id="itinerary" class="result-section">
+            <div class="result-heading">
+              <div>
+                <span class="section-kicker">03 · 行程结果</span>
+                <h2 id="itinerary-title">等待生成专属行程</h2>
+                <p id="itinerary-subtitle">填写需求后，Agent 会在这里给出一份带时间、天气、路线和预算的逐日方案。</p>
+              </div>
+              <span id="itinerary-badge" class="status-chip neutral">尚未运行</span>
+            </div>
+
+            <div class="summary-metrics">
+              <article class="summary-card"><span>预计总花费</span><strong id="summary-spend">—</strong><small id="summary-budget">预算 —</small></article>
+              <article class="summary-card"><span>住宿参考</span><strong id="summary-hotel">—</strong><small>按当前权限可见证据</small></article>
+              <article class="summary-card"><span>可用证据</span><strong id="summary-evidence">—</strong><small id="summary-blocked">拦截 0 份</small></article>
+              <article class="summary-card"><span>行程天数</span><strong id="summary-days">—</strong><small id="summary-pace">节奏 —</small></article>
+            </div>
+
+            <div id="assistant-note" class="assistant-note">
+              <span class="assistant-avatar" aria-hidden="true">AI</span>
+              <div><strong>TripPilot 助手</strong><p>生成行程后，我会在这里说明方案如何满足你的偏好。</p></div>
+            </div>
+
+            <div id="itinerary-list" class="itinerary-list"></div>
+            <div id="warning-list" class="warning-list"></div>
+          </section>
+
+          <section id="evidence" class="evidence-grid">
+            <section class="panel evidence-panel">
+              <div class="panel-header compact-header">
+                <div>
+                  <span class="section-kicker">04 · 证据链</span>
+                  <h2>回答依据</h2>
+                </div>
+                <span id="evidence-count" class="count-chip">0</span>
+              </div>
+              <div id="citation-list" class="citation-list"></div>
+              <div id="retrieval-audit" class="retrieval-audit"></div>
+              <div id="citation-empty" class="empty-state">
+                <span class="empty-icon" aria-hidden="true">∅</span>
+                <div><strong>等待证据检索</strong><p>生成行程后会显示本次可访问的文档和引用。</p></div>
+              </div>
+            </section>
+
+            <section class="panel access-panel">
+              <div class="panel-header compact-header">
+                <div>
+                  <span class="section-kicker">05 · 权限边界</span>
+                  <h2>当前身份不可见</h2>
+                </div>
+                <span id="blocked-count" class="status-chip neutral">0 份</span>
+              </div>
+              <div id="blocked-list" class="blocked-list"></div>
+              <div class="access-footnote">
+                <span aria-hidden="true">i</span>
+                <p>权限过滤发生在召回和生成之前。被拦截的资料不会出现在行程建议中。</p>
+              </div>
+            </section>
+          </section>
+
+          <section id="validation" class="panel validation-panel">
+            <div class="panel-header">
+              <div>
+                <span class="section-kicker">06 · 阶段回归</span>
+                <h2>自动校验与固定场景</h2>
+                <p>重新执行第 33–34 课的权限、缓存、版本和偏好断言。</p>
+              </div>
+              <div class="validation-actions">
+                <span id="checks-summary" class="status-chip neutral">等待运行</span>
+                <button id="validation-button" class="button button-secondary" type="button">重新校验</button>
+              </div>
+            </div>
+            <div class="validation-layout">
+              <div id="checks-grid" class="checks-grid"></div>
+              <div class="scenario-mini-panel">
+                <div class="scenario-mini-head"><strong>固定场景</strong><span id="scenario-count">0</span></div>
+                <div id="scenario-list" class="scenario-mini-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <footer class="content-footer">
+            <span>TripPilot V2 · 第 03 阶段交付</span>
+            <span id="footer-state">等待 Agent 运行</span>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

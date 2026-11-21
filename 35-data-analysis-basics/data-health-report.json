@@ -1,0 +1,130 @@
+{
+  "row_count": 16,
+  "column_count": 8,
+  "missing_cells": 3,
+  "duplicate_booking_ids": [
+    "B003"
+  ],
+  "columns": [
+    {
+      "column": "booking_id",
+      "raw_type": "string",
+      "parsed_type": "str",
+      "missing": 0,
+      "missing_rate": 0.0,
+      "unique": 15
+    },
+    {
+      "column": "city",
+      "raw_type": "string",
+      "parsed_type": "str",
+      "missing": 1,
+      "missing_rate": 0.0625,
+      "unique": 7
+    },
+    {
+      "column": "check_in",
+      "raw_type": "string",
+      "parsed_type": "str",
+      "missing": 0,
+      "missing_rate": 0.0,
+      "unique": 8
+    },
+    {
+      "column": "nights",
+      "raw_type": "string",
+      "parsed_type": "int64",
+      "missing": 0,
+      "missing_rate": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "guests",
+      "raw_type": "string",
+      "parsed_type": "float64",
+      "missing": 0,
+      "missing_rate": 0.0,
+      "unique": 5
+    },
+    {
+      "column": "total_price",
+      "raw_type": "string",
+      "parsed_type": "float64",
+      "missing": 1,
+      "missing_rate": 0.0625,
+      "unique": 14
+    },
+    {
+      "column": "channel",
+      "raw_type": "string",
+      "parsed_type": "str",
+      "missing": 1,
+      "missing_rate": 0.0625,
+      "unique": 4
+    },
+    {
+      "column": "canceled",
+      "raw_type": "string",
+      "parsed_type": "str",
+      "missing": 0,
+      "missing_rate": 0.0,
+      "unique": 2
+    }
+  ],
+  "invalid_rows": [
+    {
+      "row_number": 3,
+      "booking_id": "B002",
+      "problems": [
+        "total_price 不是有效数字"
+      ]
+    },
+    {
+      "row_number": 7,
+      "booking_id": "B005",
+      "problems": [
+        "guests 必须大于 0，当前为 0"
+      ]
+    },
+    {
+      "row_number": 8,
+      "booking_id": "B006",
+      "problems": [
+        "total_price 必须大于 0，当前为 -100"
+      ]
+    },
+    {
+      "row_number": 10,
+      "booking_id": "B008",
+      "problems": [
+        "guests 不是有效数字"
+      ]
+    }
+  ],
+  "price_outliers": [
+    {
+      "booking_id": "B007",
+      "total_price": 5000.0,
+      "lower_bound": 0.0,
+      "upper_bound": 2295.0
+    }
+  ],
+  "city_counts": {
+    "Hangzhou": 8,
+    "Shanghai": 3,
+    "<缺失>": 1,
+    "Chengdu": 1,
+    "Shenzhen": 1,
+    "Beijing": 1,
+    "Guangzhou": 1
+  },
+  "pandas_version": "3.1.1",
+  "checks": {
+    "row_count_is_16": true,
+    "missing_cells_found": true,
+    "duplicate_id_found": true,
+    "invalid_rows_found": true,
+    "outlier_found": true,
+    "missing_city_visible": true
+  }
+}

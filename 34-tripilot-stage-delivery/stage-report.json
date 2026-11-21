@@ -1,0 +1,224 @@
+{
+  "checks": {
+    "alice_sees_private_budget": true,
+    "bob_cannot_see_private_budget": true,
+    "bob_gets_public_budget": true,
+    "cache_hit_for_same_scope": true,
+    "bob_cannot_read_planner_doc": true,
+    "route_v2_visible": true,
+    "old_route_not_reused": true,
+    "preference_uses_new_value": true,
+    "preference_keeps_history": true,
+    "preference_answer_visible": true
+  },
+  "cache": {
+    "ttl_seconds": 300,
+    "site_hits": 1,
+    "site_misses": 5,
+    "revision_invalidations": 1,
+    "ttl_expirations": 0
+  },
+  "preferences": {
+    "alice": {
+      "pace": "轻松",
+      "hotel_budget": "1200 元/晚"
+    },
+    "bob": {
+      "pace": "适中"
+    }
+  },
+  "scenarios": [
+    {
+      "name": "Alice 读取私有预算",
+      "question": "西湖附近酒店预算多少？",
+      "principal": "alice",
+      "trip_id": "hz-2026",
+      "roles": [
+        "owner",
+        "planner"
+      ],
+      "answer": "Alice 已确认的湖滨酒店价格为 1280 元/晚，含双早。 [1]",
+      "citations": [
+        {
+          "number": 1,
+          "doc_id": "hotel-budget-private",
+          "title": "Alice 西湖酒店预算单",
+          "version": 1,
+          "updated_at": "2026-11-18T09:00:00+08:00"
+        }
+      ],
+      "cache": "miss",
+      "index_revision": 5,
+      "allowed": [
+        "hotel-budget-private",
+        "hotel-budget-public",
+        "photographer-spot",
+        "rain-route"
+      ],
+      "denied": [
+        "other-trip-hotel"
+      ]
+    },
+    {
+      "name": "Alice 重复问题命中缓存",
+      "question": "西湖附近酒店预算多少？",
+      "principal": "alice",
+      "trip_id": "hz-2026",
+      "roles": [
+        "owner",
+        "planner"
+      ],
+      "answer": "Alice 已确认的湖滨酒店价格为 1280 元/晚，含双早。 [1]",
+      "citations": [
+        {
+          "number": 1,
+          "doc_id": "hotel-budget-private",
+          "title": "Alice 西湖酒店预算单",
+          "version": 1,
+          "updated_at": "2026-11-18T09:00:00+08:00"
+        }
+      ],
+      "cache": "hit",
+      "index_revision": 5,
+      "allowed": [
+        "hotel-budget-private",
+        "hotel-budget-public",
+        "photographer-spot",
+        "rain-route"
+      ],
+      "denied": [
+        "other-trip-hotel"
+      ]
+    },
+    {
+      "name": "Bob 只能读取公开预算",
+      "question": "西湖附近酒店预算多少？",
+      "principal": "bob",
+      "trip_id": "hz-2026",
+      "roles": [
+        "member"
+      ],
+      "answer": "西湖周边普通酒店平日预算约 600 到 900 元/晚，周末通常会上浮。 [1]",
+      "citations": [
+        {
+          "number": 1,
+          "doc_id": "hotel-budget-public",
+          "title": "杭州住宿费用参考",
+          "version": 1,
+          "updated_at": "2026-11-16T10:00:00+08:00"
+        }
+      ],
+      "cache": "miss",
+      "index_revision": 5,
+      "allowed": [
+        "hotel-budget-public",
+        "rain-route"
+      ],
+      "denied": [
+        "hotel-budget-private",
+        "other-trip-hotel",
+        "photographer-spot"
+      ]
+    },
+    {
+      "name": "Bob 被规划者资料拒绝",
+      "question": "雨天摄影集合点在哪里？",
+      "principal": "bob",
+      "trip_id": "hz-2026",
+      "roles": [
+        "member"
+      ],
+      "answer": "没有检索到你有权限查看、且足够可靠的旅行资料，暂时无法回答。",
+      "citations": [],
+      "cache": "miss",
+      "index_revision": 5,
+      "allowed": [
+        "hotel-budget-public",
+        "rain-route"
+      ],
+      "denied": [
+        "hotel-budget-private",
+        "other-trip-hotel",
+        "photographer-spot"
+      ]
+    },
+    {
+      "name": "Alice 查询路线 v1",
+      "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+      "principal": "alice",
+      "trip_id": "hz-2026",
+      "roles": [
+        "owner",
+        "planner"
+      ],
+      "answer": "龙翔桥地铁站 C 口临时关闭，雨天请从 B 口出站，步行约 8 分钟到西湖。 [1]",
+      "citations": [
+        {
+          "number": 1,
+          "doc_id": "rain-route",
+          "title": "龙翔桥站雨天出站路线",
+          "version": 1,
+          "updated_at": "2026-11-17T08:30:00+08:00"
+        }
+      ],
+      "cache": "miss",
+      "index_revision": 5,
+      "allowed": [
+        "hotel-budget-private",
+        "hotel-budget-public",
+        "photographer-spot",
+        "rain-route"
+      ],
+      "denied": [
+        "other-trip-hotel"
+      ]
+    },
+    {
+      "name": "发布路线 v2 后重新查询",
+      "question": "杭州下雨，龙翔桥地铁站走哪个出口？",
+      "principal": "alice",
+      "trip_id": "hz-2026",
+      "roles": [
+        "owner",
+        "planner"
+      ],
+      "answer": "龙翔桥地铁站 C 口已经恢复，B 口因施工关闭，雨天请从 C 口出站，步行约 6 分钟到西湖。 [1]",
+      "citations": [
+        {
+          "number": 1,
+          "doc_id": "rain-route",
+          "title": "龙翔桥站雨天出站路线",
+          "version": 2,
+          "updated_at": "2026-11-18T12:00:00+08:00"
+        }
+      ],
+      "cache": "index_revision_changed",
+      "index_revision": 6,
+      "allowed": [
+        "hotel-budget-private",
+        "hotel-budget-public",
+        "photographer-spot",
+        "rain-route"
+      ],
+      "denied": [
+        "other-trip-hotel"
+      ]
+    },
+    {
+      "name": "Alice 读取最新偏好",
+      "question": "按我的节奏安排行程，酒店预算怎么定？",
+      "principal": "alice",
+      "trip_id": "hz-2026",
+      "roles": [
+        "owner",
+        "planner"
+      ],
+      "answer": "偏好记忆：旅行节奏为“轻松”，酒店预算为“1200 元/晚”。旧节奏“紧凑”只保留在更新历史中，不再参与本次规划。",
+      "citations": [],
+      "cache": "not_used",
+      "index_revision": 6,
+      "allowed": [],
+      "denied": []
+    }
+  ]
+}

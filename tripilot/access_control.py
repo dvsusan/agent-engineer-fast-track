@@ -408,7 +408,7 @@ def run_demo(documents_path, update_path, output_dir):
         )
         return result, trace
 
-    # 1. Alice 能读取自己的预算单，首次查询写入私有作用域缓存。
+    # 1. Alice 能读取自己的预算单，首次查询写入只属于 Alice 的缓存。
     alice_budget, _ = run("Alice 读取私有预算", BUDGET_QUESTION, alice, 0)
     # 2. Bob 使用同一问题，但缓存键不同，不能复用 Alice 的答案。
     bob_budget, _ = run("Bob 被 ACL 拦截私有预算", BUDGET_QUESTION, bob, 1)

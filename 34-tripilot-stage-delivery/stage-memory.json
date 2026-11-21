@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "users": {
+    "alice": {
+      "preferences": {
+        "pace": {
+          "value": "轻松",
+          "source": "explicit",
+          "version": 2,
+          "recorded_on": "2026-11-19"
+        },
+        "hotel_budget": {
+          "value": "1200 元/晚",
+          "source": "explicit",
+          "version": 1,
+          "recorded_on": "2026-11-19"
+        }
+      },
+      "history": [
+        {
+          "key": "pace",
+          "old_value": "紧凑",
+          "new_value": "轻松",
+          "source": "explicit",
+          "recorded_on": "2026-11-19"
+        }
+      ]
+    },
+    "bob": {
+      "preferences": {
+        "pace": {
+          "value": "适中",
+          "source": "explicit",
+          "version": 1,
+          "recorded_on": "2026-11-19"
+        }
+      },
+      "history": []
+    }
+  }
+}
