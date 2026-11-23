@@ -1,0 +1,26 @@
+{
+  "manual_available": true,
+  "manual_file": "28-rag-pipeline/rag-answer.json",
+  "manual_citations": [
+    "杭州雨天拍照备选#rainy-day-01",
+    "杭州雨天拍照备选#rainy-day-04",
+    "杭州雨天拍照备选#rainy-day-02"
+  ],
+  "llamaindex_citations": [
+    "杭州雨天拍照备选#rainy-day-01",
+    "杭州雨天拍照备选#rainy-day-04",
+    "杭州雨天拍照备选#rainy-day-02"
+  ],
+  "manual_scores": [
+    0.4456,
+    0.2999,
+    0.2655
+  ],
+  "llamaindex_scores": [
+    0.4456,
+    0.2999,
+    0.2655
+  ],
+  "same_citations": true,
+  "same_scores": true
+}

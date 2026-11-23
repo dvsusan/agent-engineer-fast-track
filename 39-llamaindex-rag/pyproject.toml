@@ -1,0 +1,8 @@
+[project]
+name = "datapilot-llamaindex-rag"
+version = "0.1.0"
+description = "Chapter 39 LlamaIndex RAG for TripPilot"
+requires-python = ">=3.15"
+dependencies = [
+    "llama-index-core>=0.14.26,<0.15",
+]

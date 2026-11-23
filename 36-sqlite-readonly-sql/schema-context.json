@@ -1,0 +1,65 @@
+{
+  "database": "datapilot-36.db",
+  "tables": [
+    {
+      "name": "bookings",
+      "row_count": 16,
+      "columns": [
+        {
+          "name": "row_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "primary_key": true
+        },
+        {
+          "name": "booking_id",
+          "type": "TEXT",
+          "not_null": true,
+          "primary_key": false
+        },
+        {
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "primary_key": false
+        },
+        {
+          "name": "check_in",
+          "type": "TEXT",
+          "not_null": false,
+          "primary_key": false
+        },
+        {
+          "name": "nights",
+          "type": "INTEGER",
+          "not_null": false,
+          "primary_key": false
+        },
+        {
+          "name": "guests",
+          "type": "REAL",
+          "not_null": false,
+          "primary_key": false
+        },
+        {
+          "name": "total_price",
+          "type": "REAL",
+          "not_null": false,
+          "primary_key": false
+        },
+        {
+          "name": "channel",
+          "type": "TEXT",
+          "not_null": false,
+          "primary_key": false
+        },
+        {
+          "name": "canceled",
+          "type": "TEXT",
+          "not_null": true,
+          "primary_key": false
+        }
+      ]
+    }
+  ]
+}

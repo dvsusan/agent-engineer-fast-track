@@ -1,0 +1,9 @@
+[project]
+name = "tripilot-deepseek-qwen-gateway"
+version = "0.1.0"
+description = "Chapter 40 OpenAI-compatible model gateway for DeepSeek and Qwen"
+requires-python = ">=3.15"
+dependencies = [
+    "httpx>=0.28,<1",
+    "python-dotenv>=1.0,<2",
+]

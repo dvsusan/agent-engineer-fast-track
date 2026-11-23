@@ -1,0 +1,179 @@
+{
+  "framework": {
+    "name": "llama-index-core",
+    "version": "0.14.26",
+    "python": "3.15.2"
+  },
+  "pipeline": {
+    "reader": "SimpleDirectoryReader",
+    "parser": "MarkdownNodeParser",
+    "index": "VectorStoreIndex",
+    "retriever": "VectorIndexRetriever",
+    "query_engine": "ExtractiveCitationQueryEngine"
+  },
+  "embedding": {
+    "class": "LocalHashEmbedding",
+    "model_name": "signed-hash-ngram-128",
+    "method": "signed_hashed_ngrams",
+    "dimensions": 128,
+    "similarity": "cosine"
+  },
+  "document_count": 4,
+  "node_count": 11,
+  "nodes": [
+    {
+      "node_id": "hangzhou-guide-01",
+      "citation": "杭州旅行攻略#hangzhou-guide-01",
+      "doc_id": "hangzhou-guide",
+      "title": "杭州旅行攻略",
+      "header_path": "/杭州旅行攻略/",
+      "content": "杭州旅行攻略\n## 拍照路线\n\n西湖适合清晨拍照，九溪烟树适合下午散步。拍照路线应尽量缩短步行距离，并为阴雨天保留室内替代点。",
+      "embedding_preview": [
+        0.090536,
+        0.0,
+        0.0,
+        0.090536
+      ]
+    },
+    {
+      "node_id": "hangzhou-guide-02",
+      "citation": "杭州旅行攻略#hangzhou-guide-02",
+      "doc_id": "hangzhou-guide",
+      "title": "杭州旅行攻略",
+      "header_path": "/杭州旅行攻略/",
+      "content": "杭州旅行攻略\n## 预算建议\n\n两到三天的杭州市内旅行，交通和普通餐饮可以控制在 600 元到 900 元。预算紧张时，优先保留公共交通和免费景点。",
+      "embedding_preview": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "node_id": "hangzhou-guide-03",
+      "citation": "杭州旅行攻略#hangzhou-guide-03",
+      "doc_id": "hangzhou-guide",
+      "title": "杭州旅行攻略",
+      "header_path": "/杭州旅行攻略/",
+      "content": "杭州旅行攻略\n## 节奏安排\n\n轻松节奏每天安排一到两个主要区域。紧凑节奏可以把西湖、南宋御街和浙江省博物馆放在同一天。",
+      "embedding_preview": [
+        0.088736,
+        0.088736,
+        0.0,
+        -0.088736
+      ]
+    },
+    {
+      "node_id": "rainy-day-01",
+      "citation": "杭州雨天拍照备选#rainy-day-01",
+      "doc_id": "rainy-day",
+      "title": "杭州雨天拍照备选",
+      "header_path": "/杭州雨天拍照备选/",
+      "content": "杭州雨天拍照备选\n## 室内与半室内地点\n\n杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。",
+      "embedding_preview": [
+        0.0,
+        0.056796,
+        -0.227185,
+        0.0
+      ]
+    },
+    {
+      "node_id": "rainy-day-02",
+      "citation": "杭州雨天拍照备选#rainy-day-02",
+      "doc_id": "rainy-day",
+      "title": "杭州雨天拍照备选",
+      "header_path": "/杭州雨天拍照备选/",
+      "content": "杭州雨天拍照备选\n## 短距离安排\n\n如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。",
+      "embedding_preview": [
+        0.0,
+        0.075378,
+        -0.075378,
+        0.150756
+      ]
+    },
+    {
+      "node_id": "rainy-day-03",
+      "citation": "杭州雨天拍照备选#rainy-day-03",
+      "doc_id": "rainy-day",
+      "title": "杭州雨天拍照备选",
+      "header_path": "/杭州雨天拍照备选/",
+      "content": "杭州雨天拍照备选\n## 安全与设备\n\n雨天路面湿滑，九溪烟树等自然步道应减少停留。相机和手机需要防水保护，镜头起雾时不要频繁擦拭。雷电天气不要前往空旷水边。",
+      "embedding_preview": [
+        0.080845,
+        -0.080845,
+        0.0,
+        -0.16169
+      ]
+    },
+    {
+      "node_id": "rainy-day-04",
+      "citation": "杭州雨天拍照备选#rainy-day-04",
+      "doc_id": "rainy-day",
+      "title": "杭州雨天拍照备选",
+      "header_path": "/杭州雨天拍照备选/",
+      "content": "杭州雨天拍照备选\n## 证据过期提醒\n\n开放时间、预约规则和交通班次可能变化。回答时应标注资料日期，并提醒用户在出发前查看官方公告。",
+      "embedding_preview": [
+        -0.170251,
+        0.0,
+        0.0,
+        0.085126
+      ]
+    },
+    {
+      "node_id": "transport-01",
+      "citation": "杭州交通表#transport-01",
+      "doc_id": "transport",
+      "title": "杭州交通表",
+      "header_path": "/",
+      "content": "杭州交通表\n# 杭州交通表\n\n| 起点 | 终点 | 方式 | 预计时间 | 备注 |\n|---|---|---|---|---|\n| 西湖 | 浙江省博物馆 | 步行 | 18 分钟 | 雨天可改乘公交 |\n| 西湖 | 九溪烟树 | 公交 | 35 分钟 | 下车后步行较短 |\n| 南宋御街 | 西湖音乐喷泉 | 步行 | 22 分钟 | 傍晚人流较多 |\n| 杭州东站 | 西湖 | 地铁加步行 | 40 分钟 | 适合携带轻便行李 |",
+      "embedding_preview": [
+        -0.102463,
+        0.0,
+        -0.051232,
+        0.051232
+      ]
+    },
+    {
+      "node_id": "west-lake-map-01",
+      "citation": "西湖地图说明#west-lake-map-01",
+      "doc_id": "west-lake-map",
+      "title": "西湖地图说明",
+      "header_path": "/西湖地图说明/",
+      "content": "西湖地图说明\n## 浙江省博物馆\n\n浙江省博物馆位于西湖文化区域，适合雨天参观。室内展览丰富，从西湖附近步行前往不需要长距离换乘。",
+      "embedding_preview": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "node_id": "west-lake-map-02",
+      "citation": "西湖地图说明#west-lake-map-02",
+      "doc_id": "west-lake-map",
+      "title": "西湖地图说明",
+      "header_path": "/西湖地图说明/",
+      "content": "西湖地图说明\n## 西湖音乐喷泉\n\n西湖音乐喷泉适合傍晚拍照，开放安排可能调整。出发前应查看当天公告，不要只依赖旧攻略。",
+      "embedding_preview": [
+        0.0,
+        0.0,
+        0.0,
+        0.096225
+      ]
+    },
+    {
+      "node_id": "west-lake-map-03",
+      "citation": "西湖地图说明#west-lake-map-03",
+      "doc_id": "west-lake-map",
+      "title": "西湖地图说明",
+      "header_path": "/西湖地图说明/",
+      "content": "西湖地图说明\n## 九溪烟树\n\n九溪烟树以溪流和树林景观为主，适合自然摄影。雨天路面湿滑，不建议安排长距离步行。",
+      "embedding_preview": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

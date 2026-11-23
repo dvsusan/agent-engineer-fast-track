@@ -1,0 +1,148 @@
+{
+  "job_id": "f6374d11251c4fb8818bf34bed8221b6",
+  "source_filename": "bookings.csv",
+  "generated_at": "2026-11-22T02:08:16+00:00",
+  "imported_rows": 16,
+  "schema": {
+    "database": "f6374d11251c4fb8818bf34bed8221b6.db",
+    "tables": [
+      {
+        "name": "bookings",
+        "row_count": 16,
+        "columns": [
+          {
+            "name": "row_id",
+            "type": "INTEGER",
+            "not_null": false,
+            "primary_key": true
+          },
+          {
+            "name": "booking_id",
+            "type": "TEXT",
+            "not_null": true,
+            "primary_key": false
+          },
+          {
+            "name": "city",
+            "type": "TEXT",
+            "not_null": false,
+            "primary_key": false
+          },
+          {
+            "name": "check_in",
+            "type": "TEXT",
+            "not_null": false,
+            "primary_key": false
+          },
+          {
+            "name": "nights",
+            "type": "INTEGER",
+            "not_null": false,
+            "primary_key": false
+          },
+          {
+            "name": "guests",
+            "type": "REAL",
+            "not_null": false,
+            "primary_key": false
+          },
+          {
+            "name": "total_price",
+            "type": "REAL",
+            "not_null": false,
+            "primary_key": false
+          },
+          {
+            "name": "channel",
+            "type": "TEXT",
+            "not_null": false,
+            "primary_key": false
+          },
+          {
+            "name": "canceled",
+            "type": "TEXT",
+            "not_null": true,
+            "primary_key": false
+          }
+        ]
+      }
+    ]
+  },
+  "city_summary": {
+    "name": "city_summary",
+    "question": "哪些城市的有效订单最多？平均订单价格是多少？",
+    "sql": "SELECT\n    COALESCE(NULLIF(city, ''), '<缺失>') AS city,\n    COUNT(*) AS valid_orders,\n    ROUND(AVG(total_price), 2) AS avg_price\nFROM bookings\nWHERE canceled = 'no'\n  AND nights > 0\n  AND guests > 0\n  AND total_price > 0\nGROUP BY COALESCE(NULLIF(city, ''), '<缺失>')\nORDER BY valid_orders DESC, city ASC",
+    "columns": [
+      "city",
+      "valid_orders",
+      "avg_price"
+    ],
+    "rows": [
+      {
+        "city": "Hangzhou",
+        "valid_orders": 5,
+        "avg_price": 832.0
+      },
+      {
+        "city": "Shanghai",
+        "valid_orders": 3,
+        "avg_price": 1600.0
+      },
+      {
+        "city": "<缺失>",
+        "valid_orders": 1,
+        "avg_price": 450.0
+      },
+      {
+        "city": "Guangzhou",
+        "valid_orders": 1,
+        "avg_price": 980.0
+      },
+      {
+        "city": "Shenzhen",
+        "valid_orders": 1,
+        "avg_price": 5000.0
+      }
+    ],
+    "row_count": 5
+  },
+  "price_bands": {
+    "name": "price_bands",
+    "question": "有效订单主要落在哪些价格区间？",
+    "sql": "SELECT\n    CASE\n        WHEN total_price < 500 THEN '0-499'\n        WHEN total_price < 1000 THEN '500-999'\n        WHEN total_price < 2000 THEN '1000-1999'\n        ELSE '2000+'\n    END AS price_band,\n    COUNT(*) AS orders\nFROM bookings\nWHERE canceled = 'no'\n  AND nights > 0\n  AND guests > 0\n  AND total_price > 0\nGROUP BY price_band\nORDER BY MIN(total_price)",
+    "columns": [
+      "price_band",
+      "orders"
+    ],
+    "rows": [
+      {
+        "price_band": "0-499",
+        "orders": 1
+      },
+      {
+        "price_band": "500-999",
+        "orders": 6
+      },
+      {
+        "price_band": "1000-1999",
+        "orders": 3
+      },
+      {
+        "price_band": "2000+",
+        "orders": 1
+      }
+    ],
+    "row_count": 4
+  },
+  "checks": {
+    "schema_row_count_matches_import": true,
+    "city_result_not_empty": true,
+    "price_result_not_empty": true,
+    "city_and_price_totals_match": true
+  },
+  "summary": {
+    "valid_orders": 11,
+    "cities": 5,
+    "price_bands": 4
+  }
+}
