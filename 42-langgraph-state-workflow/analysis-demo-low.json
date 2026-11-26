@@ -1,0 +1,62 @@
+{
+  "status": "auto_approved",
+  "thread_id": "demo-low",
+  "generated_at": "2026-11-23T12:29:02.019656+00:00",
+  "question": "这批旅行订单的数据质量如何？能否导出经营分析报告？",
+  "source_file": "bookings-clean-42.csv",
+  "model": {
+    "provider": "deepseek",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout_seconds": 20.0,
+    "api_key_configured": true
+  },
+  "audit": {
+    "status": "ok",
+    "source_file": "bookings-clean-42.csv",
+    "row_count": 2,
+    "unique_booking_count": 2,
+    "valid_booking_count": 2,
+    "total_revenue": 1380.0,
+    "average_order_value": 690.0,
+    "duplicate_booking_ids": [],
+    "missing_city_booking_ids": [],
+    "invalid_numeric_booking_ids": [],
+    "canceled_booking_ids": [],
+    "city_breakdown": {
+      "Hangzhou": 1,
+      "Shanghai": 1
+    },
+    "quality_issues": [],
+    "warnings": [],
+    "risk_level": "low"
+  },
+  "draft": {
+    "summary": "审计文件 bookings-clean-42.csv 共 2 行，2 个唯一且有效订单，无重复、无缺失城市、无非法数值、无取消订单，质量问题和警告均为空，风险等级 low，总收入 1380.0，客单价 690.0。",
+    "key_findings": [
+      "2 条记录均为唯一且有效订单，有效订单率 100%",
+      "总收入 1380.0，平均订单金额 690.0",
+      "城市分布为 Hangzhou 1 单、Shanghai 1 单",
+      "审计未发现重复订单号、缺失城市、非法数值或取消订单"
+    ],
+    "data_risks": [
+      "样本量仅 2 单，统计代表性有限，经营结论不宜外推",
+      "审计仅覆盖单一文件 bookings-clean-42.csv，未验证与其他数据源的一致性"
+    ],
+    "approval_recommendation": "approve",
+    "confidence": "medium"
+  },
+  "draft_usage": {
+    "input_tokens": 594,
+    "output_tokens": 205,
+    "total_tokens": 799,
+    "input_token_details": {
+      "cache_read": 256
+    },
+    "output_token_details": {}
+  },
+  "draft_elapsed_ms": 2348.9,
+  "risk_level": "low",
+  "approval": null,
+  "error": null
+}

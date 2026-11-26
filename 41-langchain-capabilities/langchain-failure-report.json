@@ -1,0 +1,46 @@
+{
+  "status": "failed",
+  "question": "这批旅行订单里有多少有效订单？平均客单价是多少？数据有什么风险？",
+  "source_file": "missing-bookings.csv",
+  "model": {
+    "provider": "deepseek",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout_seconds": 20.0,
+    "api_key_configured": true
+  },
+  "orchestration": {
+    "tool_calls": [
+      {
+        "name": "audit_booking_file",
+        "args": {},
+        "id": "call_00_zMhjerzNKDI9Scxu3org1984",
+        "type": "tool_call"
+      }
+    ],
+    "tool_selection_usage": {
+      "input_tokens": 315,
+      "output_tokens": 19,
+      "total_tokens": 334,
+      "input_token_details": {
+        "cache_read": 128
+      },
+      "output_token_details": {}
+    },
+    "tool_elapsed_ms": 958.4
+  },
+  "tool": {
+    "name": "audit_booking_file",
+    "result": {
+      "status": "error",
+      "source_file": "missing-bookings.csv",
+      "error": "订单文件不存在：missing-bookings.csv"
+    }
+  },
+  "narrative": null,
+  "usage": {},
+  "checks": {},
+  "error": "ToolEvidenceError: 订单文件不存在：missing-bookings.csv",
+  "error_stage": "tool_execution",
+  "elapsed_ms": 1269.2
+}

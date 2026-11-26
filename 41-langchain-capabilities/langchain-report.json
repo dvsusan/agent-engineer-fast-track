@@ -1,0 +1,193 @@
+{
+  "status": "ok",
+  "question": "这批旅行订单里有多少有效订单？平均客单价是多少？数据有什么风险？",
+  "source_file": "bookings.csv",
+  "model": {
+    "provider": "deepseek",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout_seconds": 20.0,
+    "api_key_configured": true
+  },
+  "orchestration": {
+    "tool_calls": [
+      {
+        "name": "audit_booking_file",
+        "args": {},
+        "id": "call_00_87bgNXIFhlMSGwoeUYEo7898",
+        "type": "tool_call"
+      }
+    ],
+    "tool_selection_usage": {
+      "input_tokens": 315,
+      "output_tokens": 19,
+      "total_tokens": 334,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "output_token_details": {}
+    },
+    "tool_elapsed_ms": 1484.3,
+    "narrative_elapsed_ms": 2920.3
+  },
+  "tool": {
+    "name": "audit_booking_file",
+    "result": {
+      "status": "ok",
+      "source_file": "bookings.csv",
+      "row_count": 16,
+      "unique_booking_count": 15,
+      "valid_booking_count": 9,
+      "excluded_booking_count": 6,
+      "canceled_booking_count": 2,
+      "duplicate_booking_ids": [
+        "B003"
+      ],
+      "missing_city_booking_ids": [
+        "B004"
+      ],
+      "invalid_numeric_booking_ids": [
+        "B002",
+        "B005",
+        "B006",
+        "B008"
+      ],
+      "canceled_booking_ids": [
+        "B006",
+        "B009"
+      ],
+      "total_revenue": 13440.0,
+      "average_order_value": 1493.33,
+      "city_breakdown": [
+        {
+          "city": "Hangzhou",
+          "orders": 5,
+          "revenue": 4160.0,
+          "average_order_value": 832.0
+        },
+        {
+          "city": "Shanghai",
+          "orders": 2,
+          "revenue": 3300.0,
+          "average_order_value": 1650.0
+        },
+        {
+          "city": "Guangzhou",
+          "orders": 1,
+          "revenue": 980.0,
+          "average_order_value": 980.0
+        },
+        {
+          "city": "Shenzhen",
+          "orders": 1,
+          "revenue": 5000.0,
+          "average_order_value": 5000.0
+        }
+      ],
+      "price_outliers": [
+        {
+          "booking_id": "B007",
+          "city": "Shenzhen",
+          "total_price": 5000.0,
+          "upper_bound": 2490.0
+        }
+      ],
+      "quality_issues": [
+        {
+          "row_number": 3,
+          "booking_id": "B002",
+          "problems": [
+            "total_price 不是有效数字"
+          ]
+        },
+        {
+          "row_number": 6,
+          "booking_id": "B004",
+          "problems": [
+            "city 为空"
+          ]
+        },
+        {
+          "row_number": 7,
+          "booking_id": "B005",
+          "problems": [
+            "guests 必须大于 0，当前为 0"
+          ]
+        },
+        {
+          "row_number": 8,
+          "booking_id": "B006",
+          "problems": [
+            "total_price 必须大于 0，当前为 -100"
+          ]
+        },
+        {
+          "row_number": 10,
+          "booking_id": "B008",
+          "problems": [
+            "guests 不是有效数字"
+          ]
+        }
+      ],
+      "warnings": [
+        "发现重复订单号：B003，统计时已去重",
+        "城市为空：B004",
+        "数值字段无效：B002, B005, B006, B008",
+        "取消订单未计入有效订单：B006, B009",
+        "发现高客单价离群订单：B007"
+      ]
+    }
+  },
+  "narrative": {
+    "summary": "本批 bookings.csv 共 16 行，去重后 15 个订单号，其中有效订单 9 单，排除 6 单（含 2 单取消）。有效订单总营收 13440.0，平均客单价 1493.33。数据存在重复、缺失、非法数值和高客单价离群等问题，结论需谨慎使用。",
+    "key_findings": [
+      "有效订单数为 9 单，排除订单 6 单，其中取消订单 2 单（B006、B009）。",
+      "有效订单总营收 13440.0，平均客单价 1493.33。",
+      "城市分布中杭州订单最多（5 单，营收 4160.0，客单价 832.0），深圳仅 1 单但客单价 5000.0。",
+      "B007 为高客单价离群订单（5000.0，超过上界 2490.0），对整体客单价有明显拉高作用。"
+    ],
+    "data_risks": [
+      "订单号 B003 重复，统计时已去重，原始行数与唯一订单数不一致（16 行 vs 15 单）。",
+      "B004 城市字段为空，影响城市维度归因。",
+      "B002、B005、B006、B008 存在非法数值（价格非数字、guests 为 0 或非数字、价格为负），已从有效订单中排除。",
+      "B007 客单价 5000.0 显著高于上界 2490.0，属高客单价离群值，可能扭曲平均客单价。",
+      "取消订单 B006、B009 未计入有效订单，若业务口径不同需重新核对。"
+    ],
+    "next_actions": [
+      "与业务确认有效订单口径（是否剔除取消单、异常单）后再对外引用 9 单与 1493.33 客单价。",
+      "修复或补录 B004 城市、B002/B005/B006/B008 的非法数值字段，并核实 B003 重复记录。",
+      "单独复核 B007 高客单价订单的真实性，必要时在客单价分析中做敏感性对比。"
+    ],
+    "confidence": "medium"
+  },
+  "usage": {
+    "tool_selection": {
+      "input_tokens": 315,
+      "output_tokens": 19,
+      "total_tokens": 334,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "output_token_details": {}
+    },
+    "narrative": {
+      "input_tokens": 1219,
+      "output_tokens": 465,
+      "total_tokens": 1684,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "output_token_details": {}
+    },
+    "total_tokens": 2018
+  },
+  "checks": {
+    "tool_called": true,
+    "tool_completed": true,
+    "metrics_present": true,
+    "narrative_validated": true
+  },
+  "error": null,
+  "error_stage": null,
+  "elapsed_ms": 8568.1
+}

@@ -1,0 +1,88 @@
+{
+  "thread_id": "trip-5a191430a3",
+  "status": "auto_approved",
+  "generated_at": "2026-11-24T10:27:48+00:00",
+  "request": {
+    "user_id": "alice",
+    "prompt": "周末去杭州两天，喜欢拍照和美食，节奏轻松，总预算 3000 元",
+    "destination": "杭州",
+    "days": 2,
+    "budget": 3000,
+    "pace": "轻松",
+    "interests": [
+      "拍照",
+      "美食"
+    ]
+  },
+  "evidence": [
+    {
+      "citation": "杭州旅行攻略#hangzhou-guide-03",
+      "title": "杭州旅行攻略",
+      "content": "轻松节奏每天安排一到两个主要区域。紧凑节奏可以把西湖、南宋御街和浙江省博物馆放在同一天。",
+      "score": 0.3312
+    },
+    {
+      "citation": "杭州雨天拍照备选#rainy-day-01",
+      "title": "杭州雨天拍照备选",
+      "content": "杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。",
+      "score": 0.2803
+    },
+    {
+      "citation": "杭州雨天拍照备选#rainy-day-02",
+      "title": "杭州雨天拍照备选",
+      "content": "如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。",
+      "score": 0.2359
+    }
+  ],
+  "draft": {
+    "summary": "为喜欢拍照和美食、节奏轻松的杭州两日周末行程：每天只安排一到两个主要区域，围绕西湖周边步行与短程公交展开，并预留雨天室内拍照备选，整体节奏舒缓。",
+    "days": [
+      {
+        "day": 1,
+        "theme": "西湖周边轻松拍照与美食漫步",
+        "activities": [
+          "上午在西湖附近街区漫步拍照，节奏放松",
+          "中午在周边街区品尝当地美食",
+          "下午继续西湖周边短程步行游览，避免跨城奔波"
+        ],
+        "evidence": [
+          "杭州旅行攻略#hangzhou-guide-03",
+          "杭州雨天拍照备选#rainy-day-02"
+        ]
+      },
+      {
+        "day": 2,
+        "theme": "博物馆与街区室内拍照备选",
+        "activities": [
+          "上午前往浙江省博物馆拍摄展陈与建筑细节",
+          "中午在周边商业街区用餐并拍摄街景",
+          "出发前确认博物馆闭馆日和预约要求"
+        ],
+        "evidence": [
+          "杭州雨天拍照备选#rainy-day-01",
+          "杭州雨天拍照备选#rainy-day-02"
+        ]
+      }
+    ],
+    "citations": [
+      "杭州旅行攻略#hangzhou-guide-03",
+      "杭州雨天拍照备选#rainy-day-01",
+      "杭州雨天拍照备选#rainy-day-02"
+    ],
+    "confidence": "medium"
+  },
+  "draft_elapsed_ms": 1947.9,
+  "budget": {
+    "transport": 160,
+    "hotel": 400,
+    "food": 360,
+    "tickets": 240,
+    "total": 1160
+  },
+  "risk": {
+    "level": "low",
+    "reasons": []
+  },
+  "approval": null,
+  "error": null
+}

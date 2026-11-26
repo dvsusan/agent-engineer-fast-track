@@ -1,0 +1,16 @@
+[project]
+name = "datapilot-langgraph-workflow"
+version = "0.1.0"
+description = "Chapter 42 LangGraph state, conditional edges, SQLite checkpoints and human approval"
+requires-python = ">=3.15"
+dependencies = [
+    # LangGraph 负责状态图、条件边、interrupt 和恢复；业务节点仍由本课显式实现。
+    "langgraph>=1.2,<2",
+    # SQLite Checkpoint 让暂停状态写入本地数据库，进程重启后仍能按 thread_id 恢复。
+    "langgraph-checkpoint-sqlite>=3.1,<4",
+    # 第 42 课继续用 LangChain 聊天模型和 Pydantic 解析器生成分析草稿。
+    "langchain-core>=1.8,<2",
+    "langchain-openai>=1.8,<2",
+    "pandas>=2.3,<4",
+    "python-dotenv>=1.2,<2",
+]

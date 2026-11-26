@@ -98,3 +98,48 @@ uv sync --python 3.15
 ```
 
 脚本读取 `bookings.csv`，检查字段类型、缺失值、重复订单号、非法数值和四分位距（IQR）价格离群点，并生成 `data-health-report.md` 与 `data-health-report.json`。
+
+## 第 41 课：LangChain 模型、工具、编排与输出解析
+
+先复用第 40 课已经验证过的 DeepSeek 配置：
+
+```bash
+cd 41-langchain-capabilities
+cp ../40-deepseek-qwen-gateway/.env .env
+cp ../35-data-analysis-basics/bookings.csv .
+uv sync --python 3.15
+```
+
+运行真实模型分析链：
+
+```bash
+.venv/bin/python datapilot_langchain.py --output langchain-report.json
+```
+
+程序会用 `ChatOpenAI` 调用 DeepSeek，让模型选择 `audit_booking_file`，再由 pandas 计算有效订单、客单价、城市分布和异常订单。成功结果写入 `langchain-report.json`；缺失 CSV 时会停止二次生成，并把失败原因写入 `langchain-failure-report.json`。
+
+## 第 42 课：LangGraph 状态图与人工审批
+
+```bash
+cd 42-langgraph-state-workflow
+cp ../41-langchain-capabilities/.env .env
+cp ../35-data-analysis-basics/bookings.csv .
+uv sync --python 3.15
+```
+
+启动高风险分析线程，流程会在审批节点暂停：
+
+```bash
+.venv/bin/python datapilot_graph.py --start --thread-id demo-approval
+.venv/bin/python datapilot_graph.py --status --thread-id demo-approval
+```
+
+批准或拒绝后从同一个 SQLite Checkpoint 恢复：
+
+```bash
+.venv/bin/python datapilot_graph.py --resume approve --thread-id demo-approval --feedback "仅用于内部复盘"
+.venv/bin/python datapilot_graph.py --start --thread-id demo-reject
+.venv/bin/python datapilot_graph.py --resume reject --thread-id demo-reject --feedback "数据口径未确认"
+```
+
+`checkpoint.sqlite` 保存可恢复状态，`analysis-demo-*.json` 保存批准、拒绝或失败记录。Checkpoint 可能包含订单与审批信息，公开分享前必须脱敏。

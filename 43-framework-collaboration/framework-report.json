@@ -1,0 +1,533 @@
+{
+  "generated_at": "2026-11-24T10:27:51+00:00",
+  "health": {
+    "status_code": 200,
+    "body": {
+      "status": "ok",
+      "layers": {
+        "api": "FastAPI",
+        "workflow": "LangGraph",
+        "model": "LangChain",
+        "retrieval": "LlamaIndex"
+      },
+      "model": {
+        "base_url": "https://api.deepseek.com",
+        "model": "deepseek-flash",
+        "timeout_seconds": 20.0,
+        "api_key_configured": true
+      },
+      "documents": 4,
+      "checkpoint": "checkpoint.sqlite"
+    }
+  },
+  "architecture": {
+    "status_code": 200,
+    "body": {
+      "boundaries": [
+        {
+          "framework": "FastAPI",
+          "responsibility": "HTTP 路由、Pydantic 参数校验、状态码、OpenAPI 文档",
+          "not_responsible": "不负责模型推理、检索算法、状态恢复和审批规则",
+          "lesson_evidence": "POST /runs、GET /runs/{thread_id}、POST /runs/{thread_id}/approval"
+        },
+        {
+          "framework": "LangGraph",
+          "responsibility": "状态图、条件边、interrupt 审批、SQLite Checkpoint 恢复",
+          "not_responsible": "不负责提示词细节，也不替业务计算预算",
+          "lesson_evidence": "retrieve → draft → assess → approval → finalize"
+        },
+        {
+          "framework": "LangChain",
+          "responsibility": "ChatPromptTemplate、DeepSeek 模型调用、PydanticOutputParser",
+          "not_responsible": "不负责 HTTP、检索索引和跨进程状态持久化",
+          "lesson_evidence": "build_draft_chain() 与 TripDraft 解析"
+        },
+        {
+          "framework": "LlamaIndex",
+          "responsibility": "文档加载、Markdown 切分、向量化、相似度检索与引用编号",
+          "not_responsible": "不负责最终行程决策、预算和审批",
+          "lesson_evidence": "TravelKnowledgeBase.retrieve()"
+        }
+      ],
+      "migration": [
+        {
+          "handwritten": "第 28 课手写加载、切分、Embedding 和召回",
+          "framework": "LlamaIndex SimpleDirectoryReader + MarkdownNodeParser + VectorStoreIndex",
+          "kept": "引用编号、相似度阈值、无证据拒答"
+        },
+        {
+          "handwritten": "第 41 课 LangChain 链式调用模型和解析器",
+          "framework": "ChatPromptTemplate | ChatOpenAI | PydanticOutputParser",
+          "kept": "结构化输出、字段校验、错误可见"
+        },
+        {
+          "handwritten": "第 22 课任务状态机与第 42 课 LangGraph 状态图",
+          "framework": "StateGraph + 条件边 + interrupt + SqliteSaver",
+          "kept": "暂停、恢复、审批和跨进程 Checkpoint"
+        },
+        {
+          "handwritten": "第 37-38 课手写 FastAPI 路由与任务接口",
+          "framework": "FastAPI + Pydantic 请求/响应模型",
+          "kept": "参数校验、错误状态码和 OpenAPI 文档"
+        },
+        {
+          "handwritten": "第 33 课 ACL 与权限前置过滤",
+          "framework": "本课只保留接口边界，ACL 仍应由业务层在检索前执行",
+          "kept": "框架不会自动替你完成权限过滤"
+        }
+      ]
+    }
+  },
+  "low_risk_run": {
+    "status_code": 201,
+    "body": {
+      "thread_id": "trip-5a191430a3",
+      "status": "auto_approved",
+      "next": [],
+      "risk_level": "low",
+      "risk_reasons": [],
+      "approval": null,
+      "report": {
+        "thread_id": "trip-5a191430a3",
+        "status": "auto_approved",
+        "generated_at": "2026-11-24T10:27:48+00:00",
+        "request": {
+          "user_id": "alice",
+          "prompt": "周末去杭州两天，喜欢拍照和美食，节奏轻松，总预算 3000 元",
+          "destination": "杭州",
+          "days": 2,
+          "budget": 3000,
+          "pace": "轻松",
+          "interests": [
+            "拍照",
+            "美食"
+          ]
+        },
+        "evidence": [
+          {
+            "citation": "杭州旅行攻略#hangzhou-guide-03",
+            "title": "杭州旅行攻略",
+            "content": "轻松节奏每天安排一到两个主要区域。紧凑节奏可以把西湖、南宋御街和浙江省博物馆放在同一天。",
+            "score": 0.3312
+          },
+          {
+            "citation": "杭州雨天拍照备选#rainy-day-01",
+            "title": "杭州雨天拍照备选",
+            "content": "杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。",
+            "score": 0.2803
+          },
+          {
+            "citation": "杭州雨天拍照备选#rainy-day-02",
+            "title": "杭州雨天拍照备选",
+            "content": "如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。",
+            "score": 0.2359
+          }
+        ],
+        "draft": {
+          "summary": "为喜欢拍照和美食、节奏轻松的杭州两日周末行程：每天只安排一到两个主要区域，围绕西湖周边步行与短程公交展开，并预留雨天室内拍照备选，整体节奏舒缓。",
+          "days": [
+            {
+              "day": 1,
+              "theme": "西湖周边轻松拍照与美食漫步",
+              "activities": [
+                "上午在西湖附近街区漫步拍照，节奏放松",
+                "中午在周边街区品尝当地美食",
+                "下午继续西湖周边短程步行游览，避免跨城奔波"
+              ],
+              "evidence": [
+                "杭州旅行攻略#hangzhou-guide-03",
+                "杭州雨天拍照备选#rainy-day-02"
+              ]
+            },
+            {
+              "day": 2,
+              "theme": "博物馆与街区室内拍照备选",
+              "activities": [
+                "上午前往浙江省博物馆拍摄展陈与建筑细节",
+                "中午在周边商业街区用餐并拍摄街景",
+                "出发前确认博物馆闭馆日和预约要求"
+              ],
+              "evidence": [
+                "杭州雨天拍照备选#rainy-day-01",
+                "杭州雨天拍照备选#rainy-day-02"
+              ]
+            }
+          ],
+          "citations": [
+            "杭州旅行攻略#hangzhou-guide-03",
+            "杭州雨天拍照备选#rainy-day-01",
+            "杭州雨天拍照备选#rainy-day-02"
+          ],
+          "confidence": "medium"
+        },
+        "draft_elapsed_ms": 1947.9,
+        "budget": {
+          "transport": 160,
+          "hotel": 400,
+          "food": 360,
+          "tickets": 240,
+          "total": 1160
+        },
+        "risk": {
+          "level": "low",
+          "reasons": []
+        },
+        "approval": null,
+        "error": null
+      },
+      "error": null
+    }
+  },
+  "high_risk_run": {
+    "status_code": 201,
+    "body": {
+      "thread_id": "trip-93255d58e8",
+      "status": "waiting_approval",
+      "next": [
+        "approval"
+      ],
+      "risk_level": "high",
+      "risk_reasons": [
+        "预计花费 1010 元，超过预算 800 元",
+        "3 天以上紧凑行程容易疲劳，需要人工确认"
+      ],
+      "approval": {
+        "kind": "trip_plan_approval",
+        "thread_id": "trip-93255d58e8",
+        "prompt": "杭州三天紧凑打卡，预算有限，想把主要景点都走完",
+        "risk_level": "high",
+        "risk_reasons": [
+          "预计花费 1010 元，超过预算 800 元",
+          "3 天以上紧凑行程容易疲劳，需要人工确认"
+        ],
+        "budget": {
+          "transport": 120,
+          "hotel": 440,
+          "food": 300,
+          "tickets": 150,
+          "total": 1010
+        },
+        "draft": {
+          "summary": "杭州三天紧凑打卡行程，围绕西湖、南宋御街和浙江省博物馆等主要人文与拍照点展开。雨天优先安排室内展馆和有遮檐街区，出发前确认闭馆日和预约要求。",
+          "days": [
+            {
+              "day": 1,
+              "theme": "西湖与南宋御街人文打卡",
+              "activities": [
+                "上午游览西湖及周边拍照点",
+                "下午前往南宋御街街区漫步拍照",
+                "傍晚在御街周边感受人文街区氛围"
+              ],
+              "evidence": [
+                "杭州旅行攻略#hangzhou-guide-03"
+              ]
+            },
+            {
+              "day": 2,
+              "theme": "浙江省博物馆与周边街区",
+              "activities": [
+                "上午参观浙江省博物馆，拍摄展陈与建筑细节",
+                "下午在博物馆周边街区步行拍照",
+                "以步行和短程公交串联，减少跨城移动"
+              ],
+              "evidence": [
+                "杭州雨天拍照备选#rainy-day-01",
+                "杭州雨天拍照备选#rainy-day-02"
+              ]
+            },
+            {
+              "day": 3,
+              "theme": "雨天备选与室内人文收尾",
+              "activities": [
+                "优先安排室内展馆拍摄展陈和建筑细节",
+                "选择有遮檐的商业街区拍照，减少雨中步行",
+                "出发前确认闭馆日和预约要求"
+              ],
+              "evidence": [
+                "杭州雨天拍照备选#rainy-day-01"
+              ]
+            }
+          ],
+          "citations": [
+            "杭州旅行攻略#hangzhou-guide-03",
+            "杭州雨天拍照备选#rainy-day-01",
+            "杭州雨天拍照备选#rainy-day-02"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "report": null,
+      "error": null
+    }
+  },
+  "approval": {
+    "status_code": 200,
+    "body": {
+      "thread_id": "trip-93255d58e8",
+      "status": "approved",
+      "next": [],
+      "risk_level": "high",
+      "risk_reasons": [
+        "预计花费 1010 元，超过预算 800 元",
+        "3 天以上紧凑行程容易疲劳，需要人工确认"
+      ],
+      "approval": null,
+      "report": {
+        "thread_id": "trip-93255d58e8",
+        "status": "approved",
+        "generated_at": "2026-11-24T10:27:51+00:00",
+        "request": {
+          "user_id": "bob",
+          "prompt": "杭州三天紧凑打卡，预算有限，想把主要景点都走完",
+          "destination": "杭州",
+          "days": 3,
+          "budget": 800,
+          "pace": "紧凑",
+          "interests": [
+            "拍照",
+            "人文"
+          ]
+        },
+        "evidence": [
+          {
+            "citation": "杭州雨天拍照备选#rainy-day-02",
+            "title": "杭州雨天拍照备选",
+            "content": "如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。",
+            "score": 0.2925
+          },
+          {
+            "citation": "杭州雨天拍照备选#rainy-day-01",
+            "title": "杭州雨天拍照备选",
+            "content": "杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。",
+            "score": 0.2066
+          },
+          {
+            "citation": "杭州旅行攻略#hangzhou-guide-03",
+            "title": "杭州旅行攻略",
+            "content": "轻松节奏每天安排一到两个主要区域。紧凑节奏可以把西湖、南宋御街和浙江省博物馆放在同一天。",
+            "score": 0.1937
+          }
+        ],
+        "draft": {
+          "summary": "杭州三天紧凑打卡行程，围绕西湖、南宋御街和浙江省博物馆等主要人文与拍照点展开。雨天优先安排室内展馆和有遮檐街区，出发前确认闭馆日和预约要求。",
+          "days": [
+            {
+              "day": 1,
+              "theme": "西湖与南宋御街人文打卡",
+              "activities": [
+                "上午游览西湖及周边拍照点",
+                "下午前往南宋御街街区漫步拍照",
+                "傍晚在御街周边感受人文街区氛围"
+              ],
+              "evidence": [
+                "杭州旅行攻略#hangzhou-guide-03"
+              ]
+            },
+            {
+              "day": 2,
+              "theme": "浙江省博物馆与周边街区",
+              "activities": [
+                "上午参观浙江省博物馆，拍摄展陈与建筑细节",
+                "下午在博物馆周边街区步行拍照",
+                "以步行和短程公交串联，减少跨城移动"
+              ],
+              "evidence": [
+                "杭州雨天拍照备选#rainy-day-01",
+                "杭州雨天拍照备选#rainy-day-02"
+              ]
+            },
+            {
+              "day": 3,
+              "theme": "雨天备选与室内人文收尾",
+              "activities": [
+                "优先安排室内展馆拍摄展陈和建筑细节",
+                "选择有遮檐的商业街区拍照，减少雨中步行",
+                "出发前确认闭馆日和预约要求"
+              ],
+              "evidence": [
+                "杭州雨天拍照备选#rainy-day-01"
+              ]
+            }
+          ],
+          "citations": [
+            "杭州旅行攻略#hangzhou-guide-03",
+            "杭州雨天拍照备选#rainy-day-01",
+            "杭州雨天拍照备选#rainy-day-02"
+          ],
+          "confidence": "medium"
+        },
+        "draft_elapsed_ms": 2490.2,
+        "budget": {
+          "transport": 120,
+          "hotel": 440,
+          "food": 300,
+          "tickets": 150,
+          "total": 1010
+        },
+        "risk": {
+          "level": "high",
+          "reasons": [
+            "预计花费 1010 元，超过预算 800 元",
+            "3 天以上紧凑行程容易疲劳，需要人工确认"
+          ]
+        },
+        "approval": {
+          "decision": "approve",
+          "reviewer": "api-client",
+          "feedback": "预算已确认，允许生成最终行程",
+          "valid": true
+        },
+        "error": null
+      },
+      "error": null
+    }
+  },
+  "high_risk_report": {
+    "status_code": 200,
+    "body": {
+      "thread_id": "trip-93255d58e8",
+      "status": "approved",
+      "generated_at": "2026-11-24T10:27:51+00:00",
+      "request": {
+        "user_id": "bob",
+        "prompt": "杭州三天紧凑打卡，预算有限，想把主要景点都走完",
+        "destination": "杭州",
+        "days": 3,
+        "budget": 800,
+        "pace": "紧凑",
+        "interests": [
+          "拍照",
+          "人文"
+        ]
+      },
+      "evidence": [
+        {
+          "citation": "杭州雨天拍照备选#rainy-day-02",
+          "title": "杭州雨天拍照备选",
+          "content": "如果住在西湖附近，可以把浙江省博物馆和周边街区安排在同半天。路线以步行和短程公交为主，避免为了一个拍照点横穿整座城市。",
+          "score": 0.2925
+        },
+        {
+          "citation": "杭州雨天拍照备选#rainy-day-01",
+          "title": "杭州雨天拍照备选",
+          "content": "杭州下雨天想拍照又不想走太远时，优先考虑浙江省博物馆、室内展馆和有遮檐的商业街区。博物馆适合拍摄展陈和建筑细节，也能减少在雨中步行的时间。出发前需要确认闭馆日和预约要求。",
+          "score": 0.2066
+        },
+        {
+          "citation": "杭州旅行攻略#hangzhou-guide-03",
+          "title": "杭州旅行攻略",
+          "content": "轻松节奏每天安排一到两个主要区域。紧凑节奏可以把西湖、南宋御街和浙江省博物馆放在同一天。",
+          "score": 0.1937
+        }
+      ],
+      "draft": {
+        "summary": "杭州三天紧凑打卡行程，围绕西湖、南宋御街和浙江省博物馆等主要人文与拍照点展开。雨天优先安排室内展馆和有遮檐街区，出发前确认闭馆日和预约要求。",
+        "days": [
+          {
+            "day": 1,
+            "theme": "西湖与南宋御街人文打卡",
+            "activities": [
+              "上午游览西湖及周边拍照点",
+              "下午前往南宋御街街区漫步拍照",
+              "傍晚在御街周边感受人文街区氛围"
+            ],
+            "evidence": [
+              "杭州旅行攻略#hangzhou-guide-03"
+            ]
+          },
+          {
+            "day": 2,
+            "theme": "浙江省博物馆与周边街区",
+            "activities": [
+              "上午参观浙江省博物馆，拍摄展陈与建筑细节",
+              "下午在博物馆周边街区步行拍照",
+              "以步行和短程公交串联，减少跨城移动"
+            ],
+            "evidence": [
+              "杭州雨天拍照备选#rainy-day-01",
+              "杭州雨天拍照备选#rainy-day-02"
+            ]
+          },
+          {
+            "day": 3,
+            "theme": "雨天备选与室内人文收尾",
+            "activities": [
+              "优先安排室内展馆拍摄展陈和建筑细节",
+              "选择有遮檐的商业街区拍照，减少雨中步行",
+              "出发前确认闭馆日和预约要求"
+            ],
+            "evidence": [
+              "杭州雨天拍照备选#rainy-day-01"
+            ]
+          }
+        ],
+        "citations": [
+          "杭州旅行攻略#hangzhou-guide-03",
+          "杭州雨天拍照备选#rainy-day-01",
+          "杭州雨天拍照备选#rainy-day-02"
+        ],
+        "confidence": "medium"
+      },
+      "draft_elapsed_ms": 2490.2,
+      "budget": {
+        "transport": 120,
+        "hotel": 440,
+        "food": 300,
+        "tickets": 150,
+        "total": 1010
+      },
+      "risk": {
+        "level": "high",
+        "reasons": [
+          "预计花费 1010 元，超过预算 800 元",
+          "3 天以上紧凑行程容易疲劳，需要人工确认"
+        ]
+      },
+      "approval": {
+        "decision": "approve",
+        "reviewer": "api-client",
+        "feedback": "预算已确认，允许生成最终行程",
+        "valid": true
+      },
+      "error": null
+    }
+  },
+  "no_evidence_run": {
+    "status_code": 201,
+    "body": {
+      "thread_id": "trip-427c12ddb0",
+      "status": "failed",
+      "next": [],
+      "risk_level": null,
+      "risk_reasons": [],
+      "approval": null,
+      "report": {
+        "thread_id": "trip-427c12ddb0",
+        "status": "failed",
+        "generated_at": "2026-11-24T10:27:51+00:00",
+        "request": {
+          "user_id": "carol",
+          "prompt": "火星上的酒店怎么预订？",
+          "destination": "火星",
+          "days": 2,
+          "budget": 5000,
+          "pace": "适中",
+          "interests": [
+            "酒店"
+          ]
+        },
+        "evidence": [],
+        "draft": null,
+        "draft_elapsed_ms": null,
+        "budget": null,
+        "risk": {
+          "level": null,
+          "reasons": []
+        },
+        "approval": null,
+        "error": "没有检索到足够可靠的旅行证据"
+      },
+      "error": "没有检索到足够可靠的旅行证据"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+booking_id,city,check_in,nights,guests,total_price,channel,canceled
+B001,Hangzhou,2026-11-20,2,2,880,app,no
+B002,Hangzhou,2026-11-20,1,1,,web,no
+B003,Shanghai,2026-11-21,3,2,1500,app,no
+B003,Shanghai,2026-11-21,3,2,1500,app,no
+B004,,2026-11-22,1,1,450,web,no
+B005,Chengdu,2026-11-22,4,0,1200,app,no
+B006,Hangzhou,2026-11-23,2,2,-100,web,yes
+B007,Shenzhen,2026-11-23,1,1,5000,app,no
+B008,Hangzhou,2026-11-24,2,x,900,web,no
+B009,Beijing,2026-11-24,2,3,1200,miniapp,yes
+B010,Hangzhou,2026-11-25,2,2,760,web,no
+B011,Guangzhou,2026-11-25,2,2,980,app,no
+B012,Shanghai,2026-11-26,3,3,1800,web,no
+B013,Hangzhou,2026-11-26,2,2,820,,no
+B014,Hangzhou,2026-11-27,2,2,840,app,no
+B015,Hangzhou,2026-11-27,2,2,860,web,no

@@ -1,0 +1,26 @@
+{
+  "thread_id": "trip-427c12ddb0",
+  "status": "failed",
+  "generated_at": "2026-11-24T10:27:51+00:00",
+  "request": {
+    "user_id": "carol",
+    "prompt": "火星上的酒店怎么预订？",
+    "destination": "火星",
+    "days": 2,
+    "budget": 5000,
+    "pace": "适中",
+    "interests": [
+      "酒店"
+    ]
+  },
+  "evidence": [],
+  "draft": null,
+  "draft_elapsed_ms": null,
+  "budget": null,
+  "risk": {
+    "level": null,
+    "reasons": []
+  },
+  "approval": null,
+  "error": "没有检索到足够可靠的旅行证据"
+}

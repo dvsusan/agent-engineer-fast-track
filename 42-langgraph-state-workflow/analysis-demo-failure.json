@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "thread_id": "demo-failure",
+  "generated_at": "2026-11-23T12:25:25.723691+00:00",
+  "question": "这批旅行订单的数据质量如何？能否导出经营分析报告？",
+  "source_file": null,
+  "model": null,
+  "audit": null,
+  "draft": null,
+  "draft_usage": {},
+  "draft_elapsed_ms": null,
+  "risk_level": "blocked",
+  "approval": null,
+  "error": "订单文件不存在：/Users/mac/Documents/ai-test/知识星球/星球教程/code/agent-engineer-fast-track/42-langgraph-state-workflow/missing-bookings.csv"
+}

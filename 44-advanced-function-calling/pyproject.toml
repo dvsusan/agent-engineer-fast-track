@@ -1,0 +1,12 @@
+[project]
+name = "tripilot-advanced-function-calling"
+version = "0.1.0"
+description = "Chapter 44 advanced function calling: parallel calls, streamed arguments, tool selection and failure recovery"
+requires-python = ">=3.15"
+dependencies = [
+    # OpenAI SDK 直接处理 OpenAI 兼容的流式 tool_calls，便于观察框架隐藏的协议细节。
+    "openai>=3.58,<4",
+    # Pydantic 校验工具参数，非法参数在真正执行前被拦住。
+    "pydantic>=2.14,<3",
+    "python-dotenv>=1.2,<2",
+]

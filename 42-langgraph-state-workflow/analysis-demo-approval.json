@@ -1,0 +1,121 @@
+{
+  "status": "approved",
+  "thread_id": "demo-approval",
+  "generated_at": "2026-11-23T12:21:43.134004+00:00",
+  "question": "这批旅行订单的数据质量如何？能否导出经营分析报告？",
+  "source_file": "bookings.csv",
+  "model": {
+    "provider": "deepseek",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout_seconds": 20.0,
+    "api_key_configured": true
+  },
+  "audit": {
+    "status": "ok",
+    "source_file": "bookings.csv",
+    "row_count": 16,
+    "unique_booking_count": 15,
+    "valid_booking_count": 9,
+    "total_revenue": 13440.0,
+    "average_order_value": 1493.33,
+    "duplicate_booking_ids": [
+      "B003"
+    ],
+    "missing_city_booking_ids": [
+      "B004"
+    ],
+    "invalid_numeric_booking_ids": [
+      "B002",
+      "B005",
+      "B006",
+      "B008"
+    ],
+    "canceled_booking_ids": [
+      "B006",
+      "B009"
+    ],
+    "city_breakdown": {
+      "Hangzhou": 5,
+      "Shanghai": 2,
+      "Shenzhen": 1,
+      "Guangzhou": 1
+    },
+    "quality_issues": [
+      {
+        "booking_id": "B002",
+        "problems": [
+          "total_price 不是有效数字"
+        ]
+      },
+      {
+        "booking_id": "B004",
+        "problems": [
+          "city 为空"
+        ]
+      },
+      {
+        "booking_id": "B005",
+        "problems": [
+          "guests 必须大于 0，当前为 0"
+        ]
+      },
+      {
+        "booking_id": "B006",
+        "problems": [
+          "total_price 必须大于 0，当前为 -100"
+        ]
+      },
+      {
+        "booking_id": "B008",
+        "problems": [
+          "guests 不是有效数字"
+        ]
+      }
+    ],
+    "warnings": [
+      "重复订单号：B003",
+      "城市为空：B004",
+      "非法数值：B002, B005, B006, B008",
+      "取消订单：B006, B009"
+    ],
+    "risk_level": "high"
+  },
+  "draft": {
+    "summary": "审计覆盖 bookings.csv 共 16 行、15 个唯一订单号，其中仅 9 个订单通过校验；存在重复订单号、城市缺失、非法数值与取消订单等问题，风险等级为 high，当前数据不宜直接用于导出经营分析报告。",
+    "key_findings": [
+      "16 行数据中唯一订单 15 个，有效订单仅 9 个，有效率偏低。",
+      "重复订单号 B003；城市为空 B004；非法数值涉及 B002、B005、B006、B008。",
+      "取消订单为 B006、B009，其中 B006 同时存在 total_price 为 -100 的非法值。",
+      "有效订单汇总收入 13440.0，平均订单金额 1493.33，但该口径受脏数据影响需谨慎解读。",
+      "城市分布为 Hangzhou 5、Shanghai 2、Shenzhen 1、Guangzhou 1，另有 B004 城市缺失未计入。"
+    ],
+    "data_risks": [
+      "重复订单号 B003 可能导致收入与订单量重复计算。",
+      "B002、B005、B006、B008 存在非法数值，直接汇总金额与客数会失真。",
+      "B004 城市为空，城市维度分析不完整。",
+      "B006、B009 为取消订单，若未剔除会高估经营收入。",
+      "整体风险等级为 high，未清洗前导出报告存在结论偏差风险。"
+    ],
+    "approval_recommendation": "reject",
+    "confidence": "high"
+  },
+  "draft_usage": {
+    "input_tokens": 860,
+    "output_tokens": 338,
+    "total_tokens": 1198,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "draft_elapsed_ms": 4263.5,
+  "risk_level": "high",
+  "approval": {
+    "decision": "approve",
+    "reviewer": "local-cli",
+    "feedback": "仅用于内部复盘，不对外发布",
+    "valid": true
+  },
+  "error": null
+}

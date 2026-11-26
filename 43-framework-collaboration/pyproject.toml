@@ -1,0 +1,21 @@
+[project]
+name = "tripilot-framework-collaboration"
+version = "0.1.0"
+description = "Chapter 43 FastAPI, LangChain, LangGraph and LlamaIndex responsibility boundaries"
+requires-python = ">=3.15"
+dependencies = [
+    # FastAPI 只负责 HTTP 接口、参数校验和 OpenAPI 文档，不承担模型推理。
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.34,<1",
+    # LangChain 负责模型调用、提示词和结构化输出解析。
+    "langchain-core>=1.8,<2",
+    "langchain-openai>=1.8,<2",
+    # LangGraph 负责状态图、条件边、审批中断和 Checkpoint 恢复。
+    "langgraph>=1.2,<2",
+    "langgraph-checkpoint-sqlite>=3.1,<4",
+    # LlamaIndex 负责资料加载、切分、向量化与相似度检索。
+    "llama-index-core>=0.14.26,<0.15",
+    "python-dotenv>=1.2,<2",
+    # 仅用于 --report 自检：TestClient 通过 ASGI 直接调用应用，不需要监听端口。
+    "httpx>=0.28,<1",
+]
