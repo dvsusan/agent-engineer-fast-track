@@ -1,0 +1,11 @@
+[project]
+name = "tripilot-agent-skill-engineering"
+version = "0.1.0"
+description = "Chapter 45 Agent Skill engineering: discovery, on-demand loading and script execution"
+requires-python = ">=3.15"
+dependencies = [
+    # PyYAML 只负责解析 SKILL.md 的 YAML 前置元数据，不执行技能正文。
+    "pyyaml>=6.0.2,<7",
+    # Pydantic 校验技能名称、描述和执行入口，避免坏元数据进入运行时。
+    "pydantic>=2.14,<3",
+]

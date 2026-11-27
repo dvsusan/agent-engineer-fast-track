@@ -1,0 +1,141 @@
+{
+  "report_version": 1,
+  "generated_at": "2026-11-26T11:59:11.816+00:00",
+  "skill": "financial-report-audit",
+  "owner": "finance-platform",
+  "active_version": "1.0.0",
+  "candidate_version": "1.1.0",
+  "decision": "blocked",
+  "reason": "候选版本未通过全部回归用例，保持正式版本不变",
+  "manifest": {
+    "path": "skill-manifest.json",
+    "sha256": "3050d9243213013a1198d6cc36430e99d03bfb77c0c36867201877b1e6d9a84c",
+    "checks": {
+      "active_release_present": true,
+      "candidate_release_present": true,
+      "versions_distinct": true,
+      "release_bot_can_test_active": true,
+      "release_bot_can_test_candidate": true,
+      "content_digests_present": true,
+      "all": true
+    }
+  },
+  "acl_checks": [
+    {
+      "check_id": "alice_active_allowed",
+      "access": {
+        "principal": "alice",
+        "skill": "financial-report-audit",
+        "version": "1.0.0",
+        "action": "execute",
+        "allowed": true,
+        "reason": "exact_grant",
+        "matched_grant": {
+          "principal": "alice",
+          "skill": "financial-report-audit",
+          "version": "1.0.0",
+          "actions": [
+            "execute"
+          ]
+        }
+      },
+      "exit_code": 0,
+      "output_created": true,
+      "findings_count": 4,
+      "checks": {
+        "allowed_matches": true,
+        "output_matches": true,
+        "authorization_precedes_execution": true,
+        "all": true
+      },
+      "passed": true
+    },
+    {
+      "check_id": "bob_default_denied",
+      "access": {
+        "principal": "bob",
+        "skill": "financial-report-audit",
+        "version": "1.0.0",
+        "action": "execute",
+        "allowed": false,
+        "reason": "default_deny",
+        "matched_grant": null
+      },
+      "exit_code": null,
+      "output_created": false,
+      "findings_count": 0,
+      "checks": {
+        "allowed_matches": true,
+        "output_matches": true,
+        "authorization_precedes_execution": true,
+        "all": true
+      },
+      "passed": true
+    },
+    {
+      "check_id": "alice_candidate_denied",
+      "access": {
+        "principal": "alice",
+        "skill": "financial-report-audit",
+        "version": "1.1.0",
+        "action": "execute",
+        "allowed": false,
+        "reason": "no_matching_skill_version_action",
+        "matched_grant": null
+      },
+      "exit_code": null,
+      "output_created": false,
+      "findings_count": 0,
+      "checks": {
+        "allowed_matches": true,
+        "output_matches": true,
+        "authorization_precedes_execution": true,
+        "all": true
+      },
+      "passed": true
+    }
+  ],
+  "tests": {
+    "report_path": "test-report.json",
+    "report_sha256": "bffe3a80e48f392462c8a78c43d6592e7e51d61896541276b9f3bcf561d4035c",
+    "summary": {
+      "active": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "failed_cases": [],
+        "all_passed": true
+      },
+      "candidate": {
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "failed_cases": [
+          "problem_report"
+        ],
+        "all_passed": false
+      }
+    }
+  },
+  "release_gate": {
+    "decision": "blocked",
+    "promotion_ready": false,
+    "active_before": "1.0.0",
+    "active_after": "1.0.0",
+    "rollback_record": {
+      "path": "rollback-record.json",
+      "sha256": "75101d52a545b0277063fe1822b9eeb8eeec051694c8e11d78efed0e6fd392e1"
+    }
+  },
+  "checks": {
+    "manifest_all": true,
+    "acl_all": true,
+    "active_version_tests_passed": true,
+    "candidate_gate_applied": true,
+    "active_version_unchanged": true,
+    "test_report_written": true,
+    "manifest_written": true,
+    "rollback_recorded": true,
+    "all": true
+  }
+}

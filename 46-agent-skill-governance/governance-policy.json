@@ -1,0 +1,99 @@
+{
+  "skill_name": "financial-report-audit",
+  "owner": "finance-platform",
+  "active_version": "1.0.0",
+  "candidate_version": "1.1.0",
+  "release_bot": "release-bot",
+  "grants": [
+    {
+      "principal": "alice",
+      "skill": "financial-report-audit",
+      "version": "1.0.0",
+      "actions": ["execute"]
+    },
+    {
+      "principal": "release-bot",
+      "skill": "financial-report-audit",
+      "version": "1.0.0",
+      "actions": ["execute"]
+    },
+    {
+      "principal": "release-bot",
+      "skill": "financial-report-audit",
+      "version": "1.1.0",
+      "actions": ["execute"]
+    }
+  ],
+  "tests": [
+    {
+      "case_id": "problem_report",
+      "role": "active",
+      "input_path": "fixtures/sample-report.csv",
+      "expected_process": "success",
+      "expected_exit_code": 0,
+      "expected_report": true,
+      "expected_status": "failed",
+      "expected_finding_codes": [
+        "BALANCE_MISMATCH",
+        "DUPLICATE_VOUCHER",
+        "LARGE_EXPENSE",
+        "MISSING_FIELDS"
+      ]
+    },
+    {
+      "case_id": "clean_report",
+      "role": "active",
+      "input_path": "fixtures/clean-report.csv",
+      "expected_process": "success",
+      "expected_exit_code": 0,
+      "expected_report": true,
+      "expected_status": "passed",
+      "expected_finding_codes": []
+    },
+    {
+      "case_id": "missing_input",
+      "role": "active",
+      "input_path": "fixtures/not-found.csv",
+      "expected_process": "failure",
+      "expected_exit_code": 2,
+      "expected_report": false,
+      "expected_status": null,
+      "expected_finding_codes": []
+    },
+    {
+      "case_id": "problem_report",
+      "role": "candidate",
+      "input_path": "fixtures/sample-report.csv",
+      "expected_process": "success",
+      "expected_exit_code": 0,
+      "expected_report": true,
+      "expected_status": "failed",
+      "expected_finding_codes": [
+        "BALANCE_MISMATCH",
+        "DUPLICATE_VOUCHER",
+        "LARGE_EXPENSE",
+        "MISSING_FIELDS"
+      ]
+    },
+    {
+      "case_id": "clean_report",
+      "role": "candidate",
+      "input_path": "fixtures/clean-report.csv",
+      "expected_process": "success",
+      "expected_exit_code": 0,
+      "expected_report": true,
+      "expected_status": "passed",
+      "expected_finding_codes": []
+    },
+    {
+      "case_id": "missing_input",
+      "role": "candidate",
+      "input_path": "fixtures/not-found.csv",
+      "expected_process": "failure",
+      "expected_exit_code": 2,
+      "expected_report": false,
+      "expected_status": null,
+      "expected_finding_codes": []
+    }
+  ]
+}

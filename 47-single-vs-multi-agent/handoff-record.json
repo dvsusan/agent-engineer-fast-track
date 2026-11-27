@@ -1,0 +1,78 @@
+{
+  "record_version": 1,
+  "generated_at": "2026-11-27T02:12:43.265+00:00",
+  "request_id": "complex",
+  "mode": "multi",
+  "route_decision": {
+    "signals": {
+      "multi_day": true,
+      "multiple_interests": true,
+      "budget_cross_check": true,
+      "independent_review": true,
+      "multiple_travelers": true
+    },
+    "score": 5,
+    "threshold": 3,
+    "recommended_mode": "multi"
+  },
+  "agents_used": [
+    "supervisor",
+    "research_agent",
+    "budget_agent",
+    "review_agent"
+  ],
+  "chain": [
+    {
+      "handoff_id": "H001",
+      "requirement": "research",
+      "from": "supervisor",
+      "to": "research_agent",
+      "task": "研究杭州地点并生成雨天备选",
+      "input_keys": [],
+      "status": "completed",
+      "output_keys": [
+        "research"
+      ]
+    },
+    {
+      "handoff_id": "H002",
+      "requirement": "budget",
+      "from": "supervisor",
+      "to": "budget_agent",
+      "task": "核算交通、餐饮、住宿和应急预算",
+      "input_keys": [
+        "research"
+      ],
+      "status": "completed",
+      "output_keys": [
+        "budget"
+      ]
+    },
+    {
+      "handoff_id": "H003",
+      "requirement": "review",
+      "from": "supervisor",
+      "to": "review_agent",
+      "task": "独立检查预算、偏好和行程约束",
+      "input_keys": [
+        "budget",
+        "research"
+      ],
+      "status": "completed",
+      "output_keys": [
+        "review"
+      ]
+    }
+  ],
+  "guard": {
+    "max_handoffs": 4,
+    "used_handoffs": 3,
+    "within_budget": true
+  },
+  "checks": {
+    "chain_not_empty": true,
+    "all_handoffs_completed": true,
+    "within_budget": true,
+    "all": true
+  }
+}

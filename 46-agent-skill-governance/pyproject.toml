@@ -1,0 +1,11 @@
+[project]
+name = "tripilot-agent-skill-governance"
+version = "0.1.0"
+description = "Chapter 46 Agent Skill governance: manifest, ACL, regression tests and rollback"
+requires-python = ">=3.15"
+dependencies = [
+    # PyYAML 只解析技能发布包顶部的 YAML 前置元数据，不执行技能正文。
+    "pyyaml>=6.0.2,<7",
+    # Pydantic 把发布策略、ACL 授权和测试用例校验成固定契约。
+    "pydantic>=2.14,<3",
+]

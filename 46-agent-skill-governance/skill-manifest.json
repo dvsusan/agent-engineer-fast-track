@@ -1,0 +1,63 @@
+{
+  "manifest_version": 1,
+  "generated_at": "2026-11-26T11:59:11.016+00:00",
+  "skill": "financial-report-audit",
+  "owner": "finance-platform",
+  "active_version": "1.0.0",
+  "candidate_version": "1.1.0",
+  "release_bot": "release-bot",
+  "releases": {
+    "1.0.0": {
+      "role": "active",
+      "root": "skills/financial-report-audit/releases/1.0.0",
+      "skill_doc": {
+        "path": "skills/financial-report-audit/releases/1.0.0/SKILL.md",
+        "sha256": "cfd04d0d79239b459f921bf21ce21b734fefe97b3f30a7148becd1969c21158e"
+      },
+      "entrypoint": {
+        "path": "skills/financial-report-audit/releases/1.0.0/scripts/audit_financial_report.py",
+        "sha256": "1eb0216e2d845b76357fe75091a92ddabae8fd60d583b214263a2fdaa60b7788"
+      },
+      "rules": {
+        "path": "skills/financial-report-audit/releases/1.0.0/references/financial-rules.json",
+        "sha256": "ea4cd0f829562155a2aca3c6824f6dfb77c5272d4050cd473c0ed1f558d7ee86"
+      },
+      "timeout_seconds": 10.0,
+      "principals": [
+        "alice",
+        "release-bot"
+      ],
+      "content_sha256": "ac7c1914acdcd73237da284b8fdfd9df2ff5c5470f4b14691e6ac5f692ca9a7f"
+    },
+    "1.1.0": {
+      "role": "candidate",
+      "root": "skills/financial-report-audit/releases/1.1.0",
+      "skill_doc": {
+        "path": "skills/financial-report-audit/releases/1.1.0/SKILL.md",
+        "sha256": "056756a6007ef3c821b0ac5fdaa4e55375457d15db04080e3d289f4e5757faa7"
+      },
+      "entrypoint": {
+        "path": "skills/financial-report-audit/releases/1.1.0/scripts/audit_financial_report.py",
+        "sha256": "1eb0216e2d845b76357fe75091a92ddabae8fd60d583b214263a2fdaa60b7788"
+      },
+      "rules": {
+        "path": "skills/financial-report-audit/releases/1.1.0/references/financial-rules.json",
+        "sha256": "e6abdad373d57164706e5b8673fd80ef54ce84a888ea2aa30829b6dd5eb267b2"
+      },
+      "timeout_seconds": 10.0,
+      "principals": [
+        "release-bot"
+      ],
+      "content_sha256": "fa8567c006cb69740cb91b79af5e2a6b9de5dbdddfd98e52090def82a9729838"
+    }
+  },
+  "checks": {
+    "active_release_present": true,
+    "candidate_release_present": true,
+    "versions_distinct": true,
+    "release_bot_can_test_active": true,
+    "release_bot_can_test_candidate": true,
+    "content_digests_present": true,
+    "all": true
+  }
+}

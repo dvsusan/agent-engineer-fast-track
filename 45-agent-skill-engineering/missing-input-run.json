@@ -1,0 +1,108 @@
+{
+  "run_id": "skill-run-20261126080408497587",
+  "generated_at": "2026-11-26T08:04:08.498+00:00",
+  "request": "检查这份 2026 年 10 月财务报表：收入是否等于支出加结余，有没有重复流水、缺失科目或异常大额支出。",
+  "catalog": [
+    {
+      "name": "financial-report-audit",
+      "description": "检查月度财务报表的收入、支出与结余是否平衡，并识别重复流水、缺失科目和异常大额支出；用户提到财务报表、流水、科目、结余或大额支出时使用。",
+      "version": "1.0.0",
+      "triggers": [
+        "财务报表",
+        "月度报表",
+        "收入",
+        "支出",
+        "结余",
+        "流水",
+        "科目",
+        "大额支出"
+      ],
+      "body_exposed": false,
+      "instruction_chars_available": 1133
+    },
+    {
+      "name": "travel-itinerary",
+      "description": "为旅行请求生成路线、景点、酒店和预算建议；用户提到旅行、行程、景点、酒店或路线时使用。",
+      "version": "0.1.0",
+      "triggers": [
+        "旅行",
+        "行程",
+        "景点",
+        "酒店",
+        "路线"
+      ],
+      "body_exposed": false,
+      "instruction_chars_available": 111
+    }
+  ],
+  "selection": {
+    "selected": "financial-report-audit",
+    "score": 7,
+    "matched_triggers": [
+      "财务报表",
+      "收入",
+      "支出",
+      "结余",
+      "流水",
+      "科目",
+      "大额支出"
+    ],
+    "all_scores": {
+      "financial-report-audit": 7,
+      "travel-itinerary": 0
+    },
+    "body_exposed_during_discovery": false
+  },
+  "loaded_instructions": [
+    {
+      "name": "financial-report-audit",
+      "body_chars": 1133,
+      "body_sha256": "dbcdee7bf3fb053ad6e6fba71132af961f280820b8134ab8a0c023fe711999ad"
+    }
+  ],
+  "execution": {
+    "entrypoint": "scripts/audit_financial_report.py",
+    "entrypoint_inside_root": true,
+    "command": [
+      "/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/.venv/bin/python",
+      "/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/skills/financial-report-audit/scripts/audit_financial_report.py",
+      "--input",
+      "/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/skills/financial-report-audit/assets/not-found.csv",
+      "--output",
+      "/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/missing-input-report.json"
+    ],
+    "cwd": "/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/skills/financial-report-audit",
+    "environment_keys": [
+      "HOME",
+      "LANG",
+      "LC_ALL",
+      "PATH",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTHONIOENCODING",
+      "TMPDIR"
+    ],
+    "timeout_seconds": 10.0,
+    "timed_out": false,
+    "elapsed_ms": 101.9,
+    "exit_code": 2,
+    "stdout": "审计输入错误：输入文件不存在：/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/skills/financial-report-audit/assets/not-found.csv",
+    "stderr": "",
+    "report_path": "/Users/mac/agent-engineer-course/stage-04/45-agent-skill-engineering/missing-input-report.json",
+    "report_error": null
+  },
+  "business_status": null,
+  "expected_status": "failed",
+  "resources_used": [],
+  "findings": [],
+  "checks": {},
+  "runtime_checks": {
+    "entrypoint_inside_root": true,
+    "only_selected_body_loaded": true,
+    "process_completed": true,
+    "exit_code_zero": false,
+    "report_readable": false,
+    "version_matches": false,
+    "all": false,
+    "business_status_matches": false
+  }
+}

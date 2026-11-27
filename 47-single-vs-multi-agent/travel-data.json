@@ -1,0 +1,45 @@
+{
+  "dataset_version": 1,
+  "city": "杭州",
+  "attractions": [
+    {
+      "place_id": "quyuan",
+      "name": "曲院风荷与苏堤北段",
+      "tags": ["拍照", "散步", "户外"],
+      "duration_hours": 2,
+      "ticket_per_person": "0.00",
+      "indoor": false
+    },
+    {
+      "place_id": "jiuxi",
+      "name": "九溪烟树",
+      "tags": ["拍照", "轻徒步", "户外"],
+      "duration_hours": 3,
+      "ticket_per_person": "0.00",
+      "indoor": false
+    },
+    {
+      "place_id": "hefang",
+      "name": "河坊街与南宋御街",
+      "tags": ["美食", "拍照", "街区"],
+      "duration_hours": 2,
+      "ticket_per_person": "0.00",
+      "indoor": false
+    },
+    {
+      "place_id": "tea_museum",
+      "name": "中国茶叶博物馆室内展厅",
+      "tags": ["室内", "文化", "雨天备选"],
+      "duration_hours": 2,
+      "ticket_per_person": "0.00",
+      "indoor": true
+    }
+  ],
+  "prices": {
+    "currency": "CNY",
+    "hotel_per_room_night": "450.00",
+    "food_per_person_day": "180.00",
+    "local_transport_per_day": "50.00",
+    "contingency_rate": "0.10"
+  }
+}

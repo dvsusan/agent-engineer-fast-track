@@ -1,0 +1,16 @@
+{
+  "currency": "CNY",
+  "period": "2026-10",
+  "balance_tolerance": "0.00",
+  "large_expense_threshold": "70000.00",
+  "allowed_categories": ["income", "expense", "balance"],
+  "required_fields": [
+    "record_id",
+    "date",
+    "account_code",
+    "account_name",
+    "category",
+    "amount",
+    "voucher_id"
+  ]
+}

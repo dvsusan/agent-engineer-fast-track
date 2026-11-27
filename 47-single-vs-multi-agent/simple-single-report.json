@@ -1,0 +1,168 @@
+{
+  "run_id": "simple-single",
+  "generated_at": "2026-11-27T02:04:56.372+00:00",
+  "request_id": "simple",
+  "mode": "single",
+  "request": {
+    "request_id": "simple",
+    "user_id": "alice",
+    "prompt": "周六下午一个人在杭州西湖附近散步和拍照，安排轻松一点，预算 300 元。",
+    "days": 1,
+    "travelers": 1,
+    "budget": "300.00",
+    "interests": [
+      "拍照"
+    ],
+    "constraints": [
+      "轻松"
+    ]
+  },
+  "complexity": {
+    "signals": {
+      "multi_day": false,
+      "multiple_interests": false,
+      "budget_cross_check": true,
+      "independent_review": false,
+      "multiple_travelers": false
+    },
+    "score": 1,
+    "threshold": 3,
+    "recommended_mode": "single"
+  },
+  "requirements": [
+    "research",
+    "budget"
+  ],
+  "agents_used": [
+    "generalist"
+  ],
+  "agent_steps": [
+    {
+      "step": 1,
+      "agent": "generalist",
+      "action": "plan",
+      "detail": "复杂度 1/3，使用单 Agent"
+    },
+    {
+      "step": 2,
+      "agent": "generalist",
+      "action": "research",
+      "detail": "调用 search_hangzhou 并把结果写入 research"
+    },
+    {
+      "step": 3,
+      "agent": "generalist",
+      "action": "budget",
+      "detail": "调用 estimate_costs 并把结果写入 budget"
+    },
+    {
+      "step": 4,
+      "agent": "generalist",
+      "action": "compose",
+      "detail": "在同一个上下文中汇总研究、预算和复核结果"
+    }
+  ],
+  "tool_calls": [
+    {
+      "role": "generalist",
+      "requirement": "research",
+      "tool": "search_hangzhou",
+      "input_keys": [],
+      "output_key": "research",
+      "status": "completed"
+    },
+    {
+      "role": "generalist",
+      "requirement": "budget",
+      "tool": "estimate_costs",
+      "input_keys": [
+        "research"
+      ],
+      "output_key": "budget",
+      "status": "completed"
+    }
+  ],
+  "handoffs": [],
+  "artifacts": {
+    "research": {
+      "city": "杭州",
+      "places": [
+        {
+          "place_id": "quyuan",
+          "name": "曲院风荷与苏堤北段",
+          "tags": [
+            "拍照",
+            "散步",
+            "户外"
+          ],
+          "duration_hours": 2,
+          "ticket_per_person": "0.00"
+        },
+        {
+          "place_id": "jiuxi",
+          "name": "九溪烟树",
+          "tags": [
+            "拍照",
+            "轻徒步",
+            "户外"
+          ],
+          "duration_hours": 3,
+          "ticket_per_person": "0.00"
+        }
+      ],
+      "rain_fallback": {
+        "place_id": "tea_museum",
+        "name": "中国茶叶博物馆室内展厅",
+        "tags": [
+          "室内",
+          "文化",
+          "雨天备选"
+        ]
+      },
+      "evidence": [
+        "travel-data:place:quyuan",
+        "travel-data:place:jiuxi",
+        "travel-data:place:tea_museum"
+      ]
+    },
+    "budget": {
+      "currency": "CNY",
+      "breakdown": {
+        "hotel": "0.00",
+        "food": "180.00",
+        "local_transport": "50.00",
+        "tickets": "0.00",
+        "contingency": "23.00"
+      },
+      "subtotal": "230.00",
+      "total": "253.00",
+      "budget": "300.00",
+      "within_budget": true,
+      "evidence": [
+        "travel-data:prices",
+        "request:budget"
+      ]
+    }
+  },
+  "final": {
+    "status": "passed",
+    "mode": "single",
+    "answer": "第 1 天：曲院风荷与苏堤北段、九溪烟树\n雨天备选：中国茶叶博物馆室内展厅\n预估总费用：253.00 CNY，预算 300.00 元",
+    "issues": [],
+    "evidence": [
+      "travel-data:place:quyuan",
+      "travel-data:place:jiuxi",
+      "travel-data:place:tea_museum",
+      "travel-data:prices",
+      "request:budget"
+    ]
+  },
+  "checks": {
+    "routing_within_policy": true,
+    "tool_calls_within_budget": true,
+    "handoffs_within_budget": true,
+    "required_artifacts_present": true,
+    "final_status_consistent": true,
+    "all": true
+  }
+}

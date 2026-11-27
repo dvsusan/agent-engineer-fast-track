@@ -1,0 +1,503 @@
+{
+  "report_version": 1,
+  "generated_at": "2026-11-26T11:59:11.812+00:00",
+  "skill": "financial-report-audit",
+  "principal": "release-bot",
+  "active_version": "1.0.0",
+  "candidate_version": "1.1.0",
+  "runs": [
+    {
+      "case_id": "problem_report",
+      "role": "active",
+      "input_path": "fixtures/sample-report.csv",
+      "expected": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "failed",
+        "finding_codes": [
+          "BALANCE_MISMATCH",
+          "DUPLICATE_VOUCHER",
+          "LARGE_EXPENSE",
+          "MISSING_FIELDS"
+        ]
+      },
+      "actual": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "failed",
+        "finding_codes": [
+          "BALANCE_MISMATCH",
+          "DUPLICATE_VOUCHER",
+          "LARGE_EXPENSE",
+          "MISSING_FIELDS"
+        ],
+        "findings_count": 4
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": true,
+        "report_version_matches": true,
+        "all": true
+      },
+      "passed": true,
+      "execution": {
+        "access": {
+          "principal": "release-bot",
+          "skill": "financial-report-audit",
+          "version": "1.0.0",
+          "action": "execute",
+          "allowed": true,
+          "reason": "exact_grant",
+          "matched_grant": {
+            "principal": "release-bot",
+            "skill": "financial-report-audit",
+            "version": "1.0.0",
+            "actions": [
+              "execute"
+            ]
+          }
+        },
+        "command": [
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/.venv/bin/python",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.0.0/scripts/audit_financial_report.py",
+          "--input",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/sample-report.csv",
+          "--output",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/problem_report.json"
+        ],
+        "environment_keys": [
+          "HOME",
+          "LANG",
+          "LC_ALL",
+          "PATH",
+          "PYTHONDONTWRITEBYTECODE",
+          "PYTHONIOENCODING",
+          "TMPDIR"
+        ],
+        "cwd": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.0.0",
+        "timeout_seconds": 10.0,
+        "timed_out": false,
+        "elapsed_ms": 151.0,
+        "stdout": "财务报表检查完成：failed\n收入=120000.00 支出=97000.00 申报结余=30000.00 应有结余=23000.00 差异=7000.00\n发现 4 个问题\n已保存：/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/problem_report.json",
+        "stderr": "",
+        "output_path": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/problem_report.json",
+        "output_created": true,
+        "report_error": null
+      }
+    },
+    {
+      "case_id": "clean_report",
+      "role": "active",
+      "input_path": "fixtures/clean-report.csv",
+      "expected": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "passed",
+        "finding_codes": []
+      },
+      "actual": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "passed",
+        "finding_codes": [],
+        "findings_count": 0
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": true,
+        "report_version_matches": true,
+        "all": true
+      },
+      "passed": true,
+      "execution": {
+        "access": {
+          "principal": "release-bot",
+          "skill": "financial-report-audit",
+          "version": "1.0.0",
+          "action": "execute",
+          "allowed": true,
+          "reason": "exact_grant",
+          "matched_grant": {
+            "principal": "release-bot",
+            "skill": "financial-report-audit",
+            "version": "1.0.0",
+            "actions": [
+              "execute"
+            ]
+          }
+        },
+        "command": [
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/.venv/bin/python",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.0.0/scripts/audit_financial_report.py",
+          "--input",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/clean-report.csv",
+          "--output",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/clean_report.json"
+        ],
+        "environment_keys": [
+          "HOME",
+          "LANG",
+          "LC_ALL",
+          "PATH",
+          "PYTHONDONTWRITEBYTECODE",
+          "PYTHONIOENCODING",
+          "TMPDIR"
+        ],
+        "cwd": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.0.0",
+        "timeout_seconds": 10.0,
+        "timed_out": false,
+        "elapsed_ms": 107.0,
+        "stdout": "财务报表检查完成：passed\n收入=120000.00 支出=75000.00 申报结余=45000.00 应有结余=45000.00 差异=0.00\n发现 0 个问题\n已保存：/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/clean_report.json",
+        "stderr": "",
+        "output_path": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/clean_report.json",
+        "output_created": true,
+        "report_error": null
+      }
+    },
+    {
+      "case_id": "missing_input",
+      "role": "active",
+      "input_path": "fixtures/not-found.csv",
+      "expected": {
+        "process": "failure",
+        "exit_code": 2,
+        "report": false,
+        "status": null,
+        "finding_codes": []
+      },
+      "actual": {
+        "process": "failure",
+        "exit_code": 2,
+        "report": false,
+        "status": null,
+        "finding_codes": [],
+        "findings_count": 0
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": true,
+        "report_version_matches": true,
+        "all": true
+      },
+      "passed": true,
+      "execution": {
+        "access": {
+          "principal": "release-bot",
+          "skill": "financial-report-audit",
+          "version": "1.0.0",
+          "action": "execute",
+          "allowed": true,
+          "reason": "exact_grant",
+          "matched_grant": {
+            "principal": "release-bot",
+            "skill": "financial-report-audit",
+            "version": "1.0.0",
+            "actions": [
+              "execute"
+            ]
+          }
+        },
+        "command": [
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/.venv/bin/python",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.0.0/scripts/audit_financial_report.py",
+          "--input",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/not-found.csv",
+          "--output",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/missing_input.json"
+        ],
+        "environment_keys": [
+          "HOME",
+          "LANG",
+          "LC_ALL",
+          "PATH",
+          "PYTHONDONTWRITEBYTECODE",
+          "PYTHONIOENCODING",
+          "TMPDIR"
+        ],
+        "cwd": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.0.0",
+        "timeout_seconds": 10.0,
+        "timed_out": false,
+        "elapsed_ms": 93.0,
+        "stdout": "审计输入错误：输入文件不存在：/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/not-found.csv",
+        "stderr": "",
+        "output_path": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.0.0/missing_input.json",
+        "output_created": false,
+        "report_error": null
+      }
+    },
+    {
+      "case_id": "problem_report",
+      "role": "candidate",
+      "input_path": "fixtures/sample-report.csv",
+      "expected": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "failed",
+        "finding_codes": [
+          "BALANCE_MISMATCH",
+          "DUPLICATE_VOUCHER",
+          "LARGE_EXPENSE",
+          "MISSING_FIELDS"
+        ]
+      },
+      "actual": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "failed",
+        "finding_codes": [
+          "BALANCE_MISMATCH",
+          "DUPLICATE_VOUCHER",
+          "MISSING_FIELDS"
+        ],
+        "findings_count": 3
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": false,
+        "report_version_matches": true,
+        "all": false
+      },
+      "passed": false,
+      "execution": {
+        "access": {
+          "principal": "release-bot",
+          "skill": "financial-report-audit",
+          "version": "1.1.0",
+          "action": "execute",
+          "allowed": true,
+          "reason": "exact_grant",
+          "matched_grant": {
+            "principal": "release-bot",
+            "skill": "financial-report-audit",
+            "version": "1.1.0",
+            "actions": [
+              "execute"
+            ]
+          }
+        },
+        "command": [
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/.venv/bin/python",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.1.0/scripts/audit_financial_report.py",
+          "--input",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/sample-report.csv",
+          "--output",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/problem_report.json"
+        ],
+        "environment_keys": [
+          "HOME",
+          "LANG",
+          "LC_ALL",
+          "PATH",
+          "PYTHONDONTWRITEBYTECODE",
+          "PYTHONIOENCODING",
+          "TMPDIR"
+        ],
+        "cwd": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.1.0",
+        "timeout_seconds": 10.0,
+        "timed_out": false,
+        "elapsed_ms": 93.2,
+        "stdout": "财务报表检查完成：failed\n收入=120000.00 支出=97000.00 申报结余=30000.00 应有结余=23000.00 差异=7000.00\n发现 3 个问题\n已保存：/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/problem_report.json",
+        "stderr": "",
+        "output_path": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/problem_report.json",
+        "output_created": true,
+        "report_error": null
+      }
+    },
+    {
+      "case_id": "clean_report",
+      "role": "candidate",
+      "input_path": "fixtures/clean-report.csv",
+      "expected": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "passed",
+        "finding_codes": []
+      },
+      "actual": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "passed",
+        "finding_codes": [],
+        "findings_count": 0
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": true,
+        "report_version_matches": true,
+        "all": true
+      },
+      "passed": true,
+      "execution": {
+        "access": {
+          "principal": "release-bot",
+          "skill": "financial-report-audit",
+          "version": "1.1.0",
+          "action": "execute",
+          "allowed": true,
+          "reason": "exact_grant",
+          "matched_grant": {
+            "principal": "release-bot",
+            "skill": "financial-report-audit",
+            "version": "1.1.0",
+            "actions": [
+              "execute"
+            ]
+          }
+        },
+        "command": [
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/.venv/bin/python",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.1.0/scripts/audit_financial_report.py",
+          "--input",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/clean-report.csv",
+          "--output",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/clean_report.json"
+        ],
+        "environment_keys": [
+          "HOME",
+          "LANG",
+          "LC_ALL",
+          "PATH",
+          "PYTHONDONTWRITEBYTECODE",
+          "PYTHONIOENCODING",
+          "TMPDIR"
+        ],
+        "cwd": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.1.0",
+        "timeout_seconds": 10.0,
+        "timed_out": false,
+        "elapsed_ms": 100.3,
+        "stdout": "财务报表检查完成：passed\n收入=120000.00 支出=75000.00 申报结余=45000.00 应有结余=45000.00 差异=0.00\n发现 0 个问题\n已保存：/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/clean_report.json",
+        "stderr": "",
+        "output_path": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/clean_report.json",
+        "output_created": true,
+        "report_error": null
+      }
+    },
+    {
+      "case_id": "missing_input",
+      "role": "candidate",
+      "input_path": "fixtures/not-found.csv",
+      "expected": {
+        "process": "failure",
+        "exit_code": 2,
+        "report": false,
+        "status": null,
+        "finding_codes": []
+      },
+      "actual": {
+        "process": "failure",
+        "exit_code": 2,
+        "report": false,
+        "status": null,
+        "finding_codes": [],
+        "findings_count": 0
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": true,
+        "report_version_matches": true,
+        "all": true
+      },
+      "passed": true,
+      "execution": {
+        "access": {
+          "principal": "release-bot",
+          "skill": "financial-report-audit",
+          "version": "1.1.0",
+          "action": "execute",
+          "allowed": true,
+          "reason": "exact_grant",
+          "matched_grant": {
+            "principal": "release-bot",
+            "skill": "financial-report-audit",
+            "version": "1.1.0",
+            "actions": [
+              "execute"
+            ]
+          }
+        },
+        "command": [
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/.venv/bin/python",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.1.0/scripts/audit_financial_report.py",
+          "--input",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/not-found.csv",
+          "--output",
+          "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/missing_input.json"
+        ],
+        "environment_keys": [
+          "HOME",
+          "LANG",
+          "LC_ALL",
+          "PATH",
+          "PYTHONDONTWRITEBYTECODE",
+          "PYTHONIOENCODING",
+          "TMPDIR"
+        ],
+        "cwd": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/skills/financial-report-audit/releases/1.1.0",
+        "timeout_seconds": 10.0,
+        "timed_out": false,
+        "elapsed_ms": 104.1,
+        "stdout": "审计输入错误：输入文件不存在：/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/not-found.csv",
+        "stderr": "",
+        "output_path": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/test-artifacts/1.1.0/missing_input.json",
+        "output_created": false,
+        "report_error": null
+      }
+    }
+  ],
+  "summary": {
+    "active": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "failed_cases": [],
+      "all_passed": true
+    },
+    "candidate": {
+      "total": 3,
+      "passed": 2,
+      "failed": 1,
+      "failed_cases": [
+        "problem_report"
+      ],
+      "all_passed": false
+    }
+  },
+  "checks": {
+    "release_bot_authorized_for_all_runs": true,
+    "active_version_passed": true,
+    "candidate_version_passed": false,
+    "suite_completed": true
+  }
+}

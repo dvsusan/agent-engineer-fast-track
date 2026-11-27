@@ -1,0 +1,32 @@
+{
+  "skill": "financial-report-audit",
+  "skill_version": "1.0.0",
+  "generated_at": "2026-11-26T11:59:11+00:00",
+  "period": "2026-10",
+  "currency": "CNY",
+  "status": "passed",
+  "summary": {
+    "rows": 6,
+    "income_total": "120000.00",
+    "expense_total": "75000.00",
+    "declared_balance": "45000.00",
+    "expected_balance": "45000.00",
+    "variance": "0.00"
+  },
+  "checks": {
+    "balance_matches": true,
+    "no_duplicate_vouchers": true,
+    "no_missing_fields": true,
+    "no_large_expenses": true,
+    "period_matches": true,
+    "categories_valid": true,
+    "amounts_valid": true
+  },
+  "findings": [],
+  "input": "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/clean-report.csv",
+  "rules": "references/financial-rules.json",
+  "resources_used": [
+    "references/financial-rules.json",
+    "/Users/mac/agent-engineer-course/stage-04/46-agent-skill-governance/fixtures/clean-report.csv"
+  ]
+}

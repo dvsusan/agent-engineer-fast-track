@@ -1,0 +1,60 @@
+{
+  "record_version": 1,
+  "record_id": "rollback-20261126115911815055",
+  "generated_at": "2026-11-26T11:59:11.815+00:00",
+  "skill": "financial-report-audit",
+  "action": "candidate_release_reverted",
+  "from_version": "1.1.0",
+  "to_version": "1.0.0",
+  "triggered_by": "release-bot",
+  "reason": "候选版本未通过全部回归用例，发布门禁拒绝提升",
+  "failed_cases": [
+    {
+      "case_id": "problem_report",
+      "expected": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "failed",
+        "finding_codes": [
+          "BALANCE_MISMATCH",
+          "DUPLICATE_VOUCHER",
+          "LARGE_EXPENSE",
+          "MISSING_FIELDS"
+        ]
+      },
+      "actual": {
+        "process": "success",
+        "exit_code": 0,
+        "report": true,
+        "status": "failed",
+        "finding_codes": [
+          "BALANCE_MISMATCH",
+          "DUPLICATE_VOUCHER",
+          "MISSING_FIELDS"
+        ],
+        "findings_count": 3
+      },
+      "checks": {
+        "authorized": true,
+        "process_matches": true,
+        "exit_code_matches": true,
+        "report_matches": true,
+        "status_matches": true,
+        "finding_codes_match": false,
+        "report_version_matches": true,
+        "all": false
+      }
+    }
+  ],
+  "evidence": {
+    "candidate_content_sha256": "fa8567c006cb69740cb91b79af5e2a6b9de5dbdddfd98e52090def82a9729838",
+    "active_content_sha256": "ac7c1914acdcd73237da284b8fdfd9df2ff5c5470f4b14691e6ac5f692ca9a7f",
+    "manifest": "skill-manifest.json",
+    "manifest_sha256": "3050d9243213013a1198d6cc36430e99d03bfb77c0c36867201877b1e6d9a84c",
+    "test_report": "test-report.json",
+    "test_report_sha256": "bffe3a80e48f392462c8a78c43d6592e7e51d61896541276b9f3bcf561d4035c"
+  },
+  "active_version_after": "1.0.0",
+  "active_release_verified": true
+}

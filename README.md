@@ -143,3 +143,60 @@ uv sync --python 3.15
 ```
 
 `checkpoint.sqlite` 保存可恢复状态，`analysis-demo-*.json` 保存批准、拒绝或失败记录。Checkpoint 可能包含订单与审批信息，公开分享前必须脱敏。
+
+## 第 45 课：Agent Skill 工程化
+
+```bash
+cd 45-agent-skill-engineering
+uv sync --python 3.15
+.venv/bin/python skill_runtime.py --list-skills
+.venv/bin/python skill_runtime.py \
+  --request "检查这份 2026 年 10 月财务报表：收入是否等于支出加结余，有没有重复流水、缺失科目或异常大额支出。" \
+  --input skills/financial-report-audit/assets/sample-report.csv \
+  --output financial-audit-report.json \
+  --run-record skill-run.json \
+  --expect-status failed
+```
+
+运行时会发现 `financial-report-audit` 和 `travel-itinerary` 两个技能，只加载财务技能正文并执行审计脚本。问题报表输出 4 条发现，干净报表使用 `assets/clean-report.csv` 并通过全部检查；`missing-input-run.json` 保留缺失输入文件的失败证据。
+
+## 第 46 课：Agent Skill 版本治理
+
+```bash
+cd 46-agent-skill-governance
+uv sync --python 3.15
+.venv/bin/python skill_governance.py manifest
+.venv/bin/python skill_governance.py access \
+  --principal alice \
+  --version 1.0.0 \
+  --input fixtures/sample-report.csv \
+  --output governance-artifacts/acl/alice-active.json
+.venv/bin/python skill_governance.py test; exit_code=$?; echo "测试退出码=$exit_code"
+.venv/bin/python skill_governance.py release
+```
+
+清单会记录 1.0.0 和 1.1.0 的入口、规则、权限主体与 SHA-256。Alice 可以执行正式版，Bob 被 ACL 默认拒绝，Alice 不能提前执行候选版。正式版三条回归用例全部通过；候选版只有 2/3 通过，因为 1.1.0 把大额支出阈值提高到 70000 元后漏掉了 68000 元的 `LARGE_EXPENSE`。因此 `test` 命令返回 1，完整 `release` 门禁返回 0 并写入 `decision=blocked`、`rollback-record.json`，正式版本仍保持 1.0.0。
+
+## 第 47 课：单 Agent 与多 Agent 路由比较
+
+```bash
+cd 47-single-vs-multi-agent
+uv sync --python 3.15
+.venv/bin/python agent_lab.py run \
+  --request-id simple \
+  --mode single \
+  --output simple-single-report.json
+.venv/bin/python agent_lab.py run \
+  --request-id complex \
+  --mode multi \
+  --output complex-multi-report.json
+.venv/bin/python agent_lab.py run \
+  --request-id overbudget \
+  --mode multi \
+  --output overbudget-multi-report.json
+.venv/bin/python agent_lab.py compare \
+  --output comparison-report.json \
+  --handoff-record handoff-record.json
+```
+
+本课不调用外部模型，所有角色都使用确定性工具，方便单独观察架构选择。简单请求复杂度为 `1/3`，推荐单 Agent；复杂请求命中五个信号，复杂度为 `5/3`，推荐多 Agent，并产生 `H001/H002/H003` 三次结构化交接。超预算方案会在独立复核阶段得到 `blocked`，`comparison-report.json` 的十项检查应全部为 `true`。

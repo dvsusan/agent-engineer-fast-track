@@ -1,0 +1,74 @@
+{
+  "policy_version": 1,
+  "max_tool_calls": 6,
+  "max_handoffs": 4,
+  "multi_agent_threshold": 3,
+  "complexity_signals": {
+    "multi_day": {
+      "weight": 1,
+      "description": "行程跨两天及以上，需要安排顺序和住宿"
+    },
+    "multiple_interests": {
+      "weight": 1,
+      "description": "至少两个偏好需要同时覆盖"
+    },
+    "budget_cross_check": {
+      "weight": 1,
+      "description": "存在明确预算，需要独立核算"
+    },
+    "independent_review": {
+      "weight": 1,
+      "description": "用户明确要求核对或复核结果"
+    },
+    "multiple_travelers": {
+      "weight": 1,
+      "description": "多人同行，成本和节奏需要共同确认"
+    }
+  },
+  "roles": {
+    "generalist": {
+      "display_name": "通用旅行 Agent",
+      "mission": "在一个上下文中串行完成研究、预算和复核",
+      "tools": ["search_hangzhou", "estimate_costs", "review_plan"]
+    },
+    "supervisor": {
+      "display_name": "主管 Agent",
+      "mission": "分析任务、选择路由、控制预算并汇总角色结果",
+      "tools": []
+    },
+    "research_agent": {
+      "display_name": "资料研究 Agent",
+      "mission": "查找符合偏好的地点并准备雨天备选",
+      "tools": ["search_hangzhou"]
+    },
+    "budget_agent": {
+      "display_name": "预算 Agent",
+      "mission": "根据地点和人数计算费用，判断是否超预算",
+      "tools": ["estimate_costs"]
+    },
+    "review_agent": {
+      "display_name": "独立复核 Agent",
+      "mission": "检查预算、偏好、雨天备选和行程时长，不受生成角色影响",
+      "tools": ["review_plan"]
+    }
+  },
+  "routing": {
+    "research": "research_agent",
+    "budget": "budget_agent",
+    "review": "review_agent"
+  },
+  "tasks": {
+    "research": {
+      "title": "研究杭州地点并生成雨天备选",
+      "output_key": "research"
+    },
+    "budget": {
+      "title": "核算交通、餐饮、住宿和应急预算",
+      "output_key": "budget"
+    },
+    "review": {
+      "title": "独立检查预算、偏好和行程约束",
+      "output_key": "review"
+    }
+  }
+}

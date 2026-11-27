@@ -1,0 +1,6 @@
+[project]
+name = "tripilot-single-vs-multi-agent"
+version = "0.1.0"
+description = "Chapter 47 comparison lab for single-agent routing and multi-agent handoff"
+requires-python = ">=3.15"
+dependencies = []

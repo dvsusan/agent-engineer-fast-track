@@ -1,0 +1,35 @@
+{
+  "request_set_version": 1,
+  "requests": [
+    {
+      "request_id": "simple",
+      "user_id": "alice",
+      "prompt": "周六下午一个人在杭州西湖附近散步和拍照，安排轻松一点，预算 300 元。",
+      "days": 1,
+      "travelers": 1,
+      "budget": "300.00",
+      "interests": ["拍照"],
+      "constraints": ["轻松"]
+    },
+    {
+      "request_id": "complex",
+      "user_id": "alice",
+      "prompt": "周末去杭州两天，两个人从杭州东站出发，喜欢拍照和美食，预算 3000 元，需要避开雨天并核对全部费用。",
+      "days": 2,
+      "travelers": 2,
+      "budget": "3000.00",
+      "interests": ["拍照", "美食"],
+      "constraints": ["避开雨天", "核对全部费用"]
+    },
+    {
+      "request_id": "overbudget",
+      "user_id": "bob",
+      "prompt": "周末去杭州两天，两个人，喜欢拍照和美食，预算只有 1000 元，请核对全部费用。",
+      "days": 2,
+      "travelers": 2,
+      "budget": "1000.00",
+      "interests": ["拍照", "美食"],
+      "constraints": ["核对全部费用"]
+    }
+  ]
+}

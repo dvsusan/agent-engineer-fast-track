@@ -1,0 +1,64 @@
+{
+  "skill": "financial-report-audit",
+  "skill_version": "1.0.0",
+  "generated_at": "2026-11-26T08:00:59+00:00",
+  "period": "2026-10",
+  "currency": "CNY",
+  "status": "failed",
+  "summary": {
+    "rows": 8,
+    "income_total": "120000.00",
+    "expense_total": "97000.00",
+    "declared_balance": "30000.00",
+    "expected_balance": "23000.00",
+    "variance": "7000.00"
+  },
+  "checks": {
+    "balance_matches": false,
+    "no_duplicate_vouchers": false,
+    "no_missing_fields": false,
+    "no_large_expenses": false,
+    "period_matches": true,
+    "categories_valid": true,
+    "amounts_valid": true
+  },
+  "findings": [
+    {
+      "code": "BALANCE_MISMATCH",
+      "severity": "high",
+      "message": "收入 120000.00 减支出 97000.00 应为 23000.00，报表申报 30000.00，差异 7000.00",
+      "record_ids": []
+    },
+    {
+      "code": "DUPLICATE_VOUCHER",
+      "severity": "high",
+      "message": "流水号 V-1005 重复出现：R005, R007",
+      "record_ids": [
+        "R005",
+        "R007"
+      ]
+    },
+    {
+      "code": "LARGE_EXPENSE",
+      "severity": "medium",
+      "message": "记录 R005 的支出 68000.00 超过阈值 50000.00",
+      "record_ids": [
+        "R005"
+      ]
+    },
+    {
+      "code": "MISSING_FIELDS",
+      "severity": "medium",
+      "message": "记录 R007 缺少字段：account_code, account_name",
+      "record_ids": [
+        "R007"
+      ]
+    }
+  ],
+  "input": "assets/sample-report.csv",
+  "rules": "references/financial-rules.json",
+  "resources_used": [
+    "references/financial-rules.json",
+    "assets/sample-report.csv"
+  ]
+}
